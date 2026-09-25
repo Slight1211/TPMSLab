@@ -1,0 +1,20 @@
+{
+  "version": "0.2.0rc1",
+  "published": false,
+  "tests_passed": 63,
+  "paired_mesh_cases": 18,
+  "mesh_runs": 36,
+  "comsol_solved_and_reopened": 6,
+  "wheel_build": "passed",
+  "sdist_build": "passed",
+  "twine_check": "passed",
+  "fresh_environment_api_cli": "passed",
+  "optional_web_ui": "passed",
+  "finite_element_convergence_verified": false,
+  "manuscript_status": "initial draft; author and public-release metadata pending",
+  "platform_tested": "Windows Python 3.12; COMSOL 6.3.0.290",
+  "distributions": {
+    "tpmslab-0.2.0rc1-py3-none-any.whl": "1fac901307cad3dbabed222eb116a0d14dd562e1432eb6a292ef89030b406da8",
+    "tpmslab-0.2.0rc1.tar.gz": "809b3d70a0ce471e18bc0f7c6f41c9a64a4d60245c30f17ffab93605e8f08efb"
+  }
+}

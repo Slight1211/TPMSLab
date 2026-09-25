@@ -1,5 +1,7 @@
 # TPMS Lab
 
+[English quick start](docs/QUICKSTART_EN.md) | [中文使用说明](docs/QUICKSTART_ZH.md)
+
 An installable Python toolkit for graded TPMS-derived **solid and complementary pore-fluid volume meshes**.
 Release candidate 0.3.0rc1; distribution name is provisional until registry and
 maintainer checks are complete. No PyPI release has been made.

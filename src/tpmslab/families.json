@@ -1,0 +1,119 @@
+{
+  "Primitive Schwartz": {
+    "expression": "cos(X)+cos(Y)+cos(Z)",
+    "source_label": "Primitive Schwartz Surface"
+  },
+  "Double P": {
+    "expression": "0.5*(cos(X)*cos(Y)+cos(Y)*cos(Z)+cos(Z)*cos(X))+0.2*(cos(2*X)+cos(2*Y)+cos(2*Z))",
+    "source_label": "Double P Surface"
+  },
+  "Gyroid": {
+    "expression": "sin(X)*cos(Y) + sin(Z)*cos(X) + sin(Y)*cos(Z)",
+    "source_label": "Gyroid Surface"
+  },
+  "Double Gyroid": {
+    "expression": "2.75*(sin(2*X)*sin(Z)*cos(Y) + sin(2*Y)*sin(X)*cos(Z) + sin(2*Z)*sin(Y)*cos(X))-(cos(2*X)*cos(2*Y)+cos(2*Y)*cos(2*Z)+cos(2*Z)*cos(2*X))",
+    "source_label": "Double Gyroid Surface"
+  },
+  "Diamond": {
+    "expression": "(cos(X)*cos(Y)*cos(Z)) - (sin(X)*sin(Y)*sin(Z))",
+    "source_label": "Diamond Surface"
+  },
+  "Double Diamond 1": {
+    "expression": "sin(2*X)*sin(2*Y)+sin(2*Y)*sin(2*Z)+sin(2*X)*sin(2*Z)+cos(2*X)*cos(2*Y)*cos(2*Z)",
+    "source_label": "Double Diamond 1 Surface"
+  },
+  "Double Diamond 2": {
+    "expression": "cos(2*X)*cos(2*Y)+cos(2*Y)*cos(2*Z)+cos(2*X)*cos(2*Z)+sin(2*X)*sin(2*Y)*sin(2*Z)",
+    "source_label": "Double Diamond 2 Surface"
+  },
+  "IWP": {
+    "expression": "2*(cos(X)*cos(Y)+cos(Y)*cos(Z)+cos(Z)*cos(X))-(cos(2*X)+cos(2*Y)+cos(2*Z))",
+    "source_label": "IWP Surface"
+  },
+  "FRD Prime": {
+    "expression": "4*(cos(X)*cos(Y)*cos(Z))-(cos(2*X)*cos(2*Y)+cos(2*X)*cos(2*Z)+cos(2*Y)*cos(2*Z))",
+    "source_label": "FRD Prime Surface"
+  },
+  "I2-Y": {
+    "expression": "-2*(sin(2*X)*cos(Y)*sin(Z) + sin(X)*sin(2*Y)*cos(Z) + cos(X)*sin(Y)*sin(2*Z)) + cos(2*X)*cos(2*Y) + cos(2*Y)*cos(2*Z) + cos(2*X)*cos(2*Z)",
+    "source_label": "I2-Y Surface"
+  },
+  "G Prime 1": {
+    "expression": "5*(sin(2*X)*sin(Z)*cos(Y)+sin(2*Y)*sin(X)*cos(Z)+sin(2*Z)*sin(Y)*cos(X))+(cos(2*X)*cos(2*Y)+cos(2*Y)*cos(2*Z)+cos(2*Z)*cos(2*X))",
+    "source_label": "G Prime 1 Surface"
+  },
+  "G Prime 2": {
+    "expression": "(sin(2*X)*sin(Z)*cos(Y)+sin(2*Y)*sin(X)*cos(Z)+sin(2*Z)*sin(Y)*cos(X))+0.32",
+    "source_label": "G Prime 2 Surface"
+  },
+  "Neovius": {
+    "expression": "3*(cos(X)+cos(Y)+cos(Z))+4*(cos(X)*cos(Y)*cos(Z))",
+    "source_label": "Neovius Surface"
+  },
+  "Lidinoid": {
+    "expression": "(sin(2*X)*sin(Z)*cos(Y)+sin(2*Y)*sin(X)*cos(Z)+sin(2*Z)*sin(Y)*cos(X))-(cos(2*X)*cos(2*Y)+cos(2*Y)*cos(2*Z)+cos(2*Z)*cos(2*X))+0.3",
+    "source_label": "Lidinoid Surface"
+  },
+  "D Prime": {
+    "expression": "0.5*(sin(X)*sin(Y)*sin(Z)+cos(X)*cos(Y)*cos(Z))-0.5*(cos(2*X)*cos(2*Y)+cos(2*Y)*cos(2*Z)+cos(2*Z)*cos(2*X))-0.2",
+    "source_label": "D Prime Surface"
+  },
+  "KP": {
+    "expression": "0.3*(cos(X)+cos(Y)+cos(Z))+0.3*(cos(X)*cos(Y)+cos(Y)*cos(Z)+cos(Z)*cos(X))-0.4*(cos(2*X)+cos(2*Y)+cos(2*Z))+0.2",
+    "source_label": "KP Surface"
+  },
+  "S": {
+    "expression": "cos(2*X)*sin(Y)*cos(Z)+cos(2*Y)*sin(Z)*cos(X)+cos(2*Z)*sin(X)*cos(Y)-0.4",
+    "source_label": "S Surface"
+  },
+  "Fischer-Koch": {
+    "expression": "(cos(X)*cos(Y)+cos(Y)*cos(Z)+cos(Z)*cos(X))-(cos(2*X)+cos(2*Y)+cos(2*Z))",
+    "source_label": "Fischer-Koch Surface"
+  },
+  "Bionic Bone 1": {
+    "expression": "20*(cos(X)*sin(Y)+cos(Y)*sin(Z)+cos(Z)*sin(X))-0.5*(cos(2*X)*cos(2*Y)+cos(2*Y)*cos(2*Z)+cos(2*Z)*cos(2*X))-4",
+    "source_label": "Bionic Bone 1 Surface"
+  },
+  "Bionic Bone 2": {
+    "expression": "10*(cos(X)*sin(Y)+cos(Y)*sin(Z)+cos(Z)*sin(X))-2*(cos(2*X)*cos(2*Y)+cos(2*Y)*cos(2*Z)+cos(2*Z)*cos(2*X))-12",
+    "source_label": "Bionic Bone 2 Surface"
+  },
+  "Octo 1": {
+    "expression": "4*(cos(X)*cos(Y)+cos(Y)*cos(Z)+cos(Z)*cos(X))-2.8*(cos(X)*cos(Y)*cos(Z))+(cos(X)+cos(Y)+cos(Z))+1.5",
+    "source_label": "Octo 1 Surface"
+  },
+  "Octo 2": {
+    "expression": "4*(cos(X)*cos(Y)+cos(Y)*cos(Z)+cos(Z)*cos(X))-3*(cos(X)+cos(Y)+cos(Z))+2.4",
+    "source_label": "Octo 2 Surface"
+  },
+  "PN": {
+    "expression": "0.6*(cos(X)*cos(Y)*cos(Z))+0.4*(cos(X)+cos(Y)+cos(Z))+0.2*(cos(2*X)*cos(2*Y)*cos(2*Z))+0.2*(cos(2*X)+cos(2*Y)+cos(2*Z))+0.1*(cos(3*X)+cos(3*Y)+cos(3*Z))+0.2*(cos(X)*cos(Y)+cos(Y)*cos(Z)+cos(Z)*cos(X))",
+    "source_label": "PN Surface"
+  },
+  "C(Y)": {
+    "expression": "sin(X)*sin(Y)*sin(Z)+sin(2*X)*sin(Y)+sin(2*Y)*sin(Z)+sin(2*Z)*sin(X)-cos(X)*cos(Y)*cos(Z)+sin(2*X)*cos(Z)+sin(2*Y)*cos(X)+sin(2*Z)*cos(Y)",
+    "source_label": "C(Y) Surface"
+  },
+  "Black D": {
+    "expression": "sin(X)*sin(Y)*sin(Z)+sin(X)*cos(Y)*cos(Z)+cos(X)*sin(Y)*cos(Z)+cos(X)*cos(Y)*sin(Z)",
+    "source_label": "Black D Surface"
+  },
+  "FRD": {
+    "expression": "8*(cos(X)*cos(Y)*cos(Z))+cos(2*X)*cos(2*Y)*cos(2*Z)-cos(2*X)*cos(2*Y)-cos(2*Y)*cos(2*Z)-cos(2*Z)*cos(2*X)",
+    "source_label": "FRD Surface"
+  },
+  "Diamond D": {
+    "expression": "sin(X)*sin(Y)*sin(Z)+sin(X)*cos(Y)*cos(Z)+cos(X)*sin(Y)*cos(Z)+cos(X)*cos(Y)*sin(Z)",
+    "source_label": "Diamond D Surface",
+    "alias_of": "Black D"
+  },
+  "D": {
+    "expression": "cos(X)*cos(Y)*cos(Z)-sin(X)*sin(Y)*sin(Z)",
+    "source_label": "D Surface"
+  },
+  "Split P": {
+    "expression": "1.1*(sin(2*X)*sin(Z)*cos(Y)+sin(2*Y)*sin(X)*cos(Z)+sin(2*Z)*sin(Y)*cos(X))-0.2*(cos(2*X)*cos(2*Y)+cos(2*Y)*cos(2*Z)+cos(2*Z)*cos(2*X))-0.4*(cos(X)+cos(Y)+cos(Z))",
+    "source_label": "Split P Surface"
+  }
+}

@@ -1,0 +1,4 @@
+- Generates graded solid and complementary pore-fluid tetrahedral meshes.
+- Preserves shared interfaces and independently connected phase domains.
+- Exports labelled meshes and reproducible COMSOL model builders.
+- Verifies three pore-flow calculations through saved-model reopening.
