@@ -170,9 +170,12 @@ def build_mph(
     progress=lambda s: None,
     *,
     max_solve_tetrahedra=180_000,
+    build_timeout_s=600,
 ):
     if type(max_solve_tetrahedra) is not int or not 1 <= max_solve_tetrahedra <= 1_000_000:
         raise ValueError("max_solve_tetrahedra must be an integer in [1, 1000000]")
+    if type(build_timeout_s) is not int or not 1 <= build_timeout_s <= 3600:
+        raise ValueError("build_timeout_s must be an integer in [1, 3600]")
     folder = Path(folder).resolve()
     exe = detect_comsol()
     if not exe:
@@ -196,7 +199,7 @@ def build_mph(
                 "-batchlog",
                 str(folder / "comsol.log"),
             ],
-            600,
+            build_timeout_s,
         ),
     ]:
         progress(
@@ -220,7 +223,9 @@ def build_mph(
                     )
                 else:
                     process.kill()
-                raise RuntimeError("COMSOL 运行超时。日志已保留；请降低分辨率后重试。")
+                raise RuntimeError(
+                    "COMSOL 运行超时。日志已保留；请降低分辨率或明确设置更长的 build_timeout_s 后重试。"
+                )
         if code:
             raise RuntimeError(f"COMSOL {name} 失败，请查看 {name}.log 与 comsol.log。")
     evidence = folder / "comsol_verification.json"

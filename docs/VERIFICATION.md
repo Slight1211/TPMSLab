@@ -75,12 +75,15 @@ python benchmarks/revision_study.py --out refinement_24 --resolutions 24 --repea
 
 The normal limit remains 180,000 tetrahedra. An explicit research override is
 bounded at 1,000,000; sufficient memory and licensed solver access are required.
+For a long research run, add `--build-timeout-s 1800` (up to 3600 seconds).
+The API keyword is `build_timeout_s`; the default remains 600 seconds and covers
+COMSOL import, solve, saving and reopening, excluding Java compilation.
 All output destinations must be new. A failed run may leave partial artifacts;
 retain its logs and use a new destination when retrying.
 
 ## Measured evidence, 2026-09-25
 
-The updated local suite passed 88 tests (Windows, Python 3.12.14). The n=12
+The updated local suite passed 93 tests (Windows, Python 3.12.14). The n=12
 reference cases have zero invalid, missing or duplicated interface triangles.
 Imported interface-area relative differences are at most 1.02e-14; the six
 individual pore-channel flux imbalances are at most 1.06e-5. These checks
@@ -97,3 +100,11 @@ these are single-run stationary-solver log measurements, not performance guarant
 中文：独立验证包含界面每个三角形两侧的相归属、导入前后的界面与孔口面积、
 各独立孔道的通量，以及密度与加密研究。以上数值对应明确的测试设计，不能推广
 为全部参数下的精度保证。论文、投稿材料和大体积求解文件独立保存，不放入软件仓库。
+
+The Gyroid sequence was extended through n=24, 28, 32, 36 and 40. At the
+36-to-40 step, changes were 0.0808% (solid volume), 0.0488% (fluid volume),
+0.2181% (outlet flow) and 0.7616% (separate solid-only strain energy). All four
+met the 1% successive-change criterion for this case. This is a combined
+geometry/solution refinement study, not a universal accuracy certificate.
+The n=40 flow log reported 529 s stationary-solver time and 9.22 GB physical
+memory; solver memory is separate from Python generation/export RSS.

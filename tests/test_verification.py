@@ -57,3 +57,11 @@ def test_solver_limit_validation(limit):
 
     with pytest.raises(ValueError, match="max_solve_tetrahedra"):
         build_mph(".", {}, max_solve_tetrahedra=limit)
+
+
+@pytest.mark.parametrize("seconds", [0, -1, 3601, 1.5, True])
+def test_build_timeout_validation(seconds):
+    from tpmslab.comsol import build_mph
+
+    with pytest.raises(ValueError, match="build_timeout_s"):
+        build_mph(".", {}, build_timeout_s=seconds)

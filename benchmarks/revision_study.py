@@ -85,6 +85,7 @@ def main():
     p.add_argument("--repeats", type=int, default=3)
     p.add_argument("--solve", action="store_true")
     p.add_argument("--max-solve-tetrahedra", type=int, default=180_000)
+    p.add_argument("--build-timeout-s", type=int, default=600)
     p.add_argument("--worker", action="store_true")
     p.add_argument("--mode", default="solid_fluid")
     p.add_argument("--strategy", default="quality_fan")
@@ -120,12 +121,17 @@ def main():
                 record["repeat"] = rep + 1
                 if args.solve and rep == 0:
                     print("SOLVE", folder, flush=True)
+                    record["solver_limits"] = {
+                        "max_solve_tetrahedra": args.max_solve_tetrahedra,
+                        "build_timeout_s": args.build_timeout_s,
+                    }
                     start = time.perf_counter()
                     record["comsol"] = build_mph(
                         folder,
                         record["report"],
                         solve=True,
                         max_solve_tetrahedra=args.max_solve_tetrahedra,
+                        build_timeout_s=args.build_timeout_s,
                         progress=lambda s: print(s, flush=True),
                     )
                     record["comsol_bridge_wall_s"] = time.perf_counter() - start
