@@ -1,0 +1,24 @@
+{
+  "title": "TPMS Lab v0.3.0",
+  "version": "0.3.0",
+  "upload_type": "software",
+  "description": "Python package for graded complementary solid and pore-fluid meshes with shared interfaces, connected-domain metadata and optional verified COMSOL workflows. Source, tests, examples and numerical validation records are included.",
+  "creators": [
+    {
+      "name": "Chen, Xin",
+      "affiliation": "McGill University"
+    },
+    {
+      "name": "Akbarzadeh, Abdolhamid",
+      "affiliation": "McGill University"
+    }
+  ],
+  "license": "MIT",
+  "keywords": [
+    "TPMS",
+    "graded lattices",
+    "volume meshes",
+    "COMSOL",
+    "Python"
+  ]
+}

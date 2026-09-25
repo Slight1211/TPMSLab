@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "tpmslab"
-version = "0.3.0rc1"
+version = "0.3.0"
 description = "Direct conforming volume meshes for graded implicit TPMS lattices"
 readme = "README.md"
 requires-python = ">=3.11"

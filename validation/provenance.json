@@ -1,0 +1,56 @@
+{
+  "package_version": "0.3.0",
+  "scientific_baseline_commit": "686b783e0385ae40a8858f0aba15824c5d02ec92",
+  "records_origin": "Existing measured runs, 2026-09-25; not regenerated as new results",
+  "algorithm_files_unchanged": [
+    {
+      "path": "src/tpmslab/__main__.py",
+      "sha256": "482b8693e2fe6dbd732e3d7961e03827d3efa187bad11d29da188be580ebbeea"
+    },
+    {
+      "path": "src/tpmslab/cli.py",
+      "sha256": "c2d65ff2bd0f3c93fdb3d4915c90ecdadbb4965cfa8d71321b84aa875a8eaf53"
+    },
+    {
+      "path": "src/tpmslab/comsol.py",
+      "sha256": "2cc06f2d872b406485e25f0e551166d131abf7025a97ca2b5a49c1b777dd3175"
+    },
+    {
+      "path": "src/tpmslab/comsol_audit.py",
+      "sha256": "ea0256456e79d4be4506585e84ee8b3f98f325478216ce66cf1a33e9eee32762"
+    },
+    {
+      "path": "src/tpmslab/comsol_dual.py",
+      "sha256": "21882422db4fe2a5e2452389ad48c3085cb09cd3f42c9aec25de7a39ac92a6d1"
+    },
+    {
+      "path": "src/tpmslab/io.py",
+      "sha256": "146163e3b1dedec4891db8dda01da83088331d2cfd14432ac1f2073245599f9a"
+    },
+    {
+      "path": "src/tpmslab/model.py",
+      "sha256": "89815d7dc19fc0f629367b0bf46f350698b7aba64a61a319767faecd152792d5"
+    },
+    {
+      "path": "src/tpmslab/multidomain.py",
+      "sha256": "5ec92d9bdfe2cb7d3b83a000a116b0ca0c577e849903886248b92f91e5246d8e"
+    },
+    {
+      "path": "src/tpmslab/quality.py",
+      "sha256": "024211353cab1893cae63d4e0a63fc6dd4455e517cf53ac2f7b8d54cdd71b5ae"
+    },
+    {
+      "path": "src/tpmslab/verification.py",
+      "sha256": "e08fdf965d8352765eba24872a2fed2c44d079c2dd0c8c4355499b90a0e14ed9"
+    },
+    {
+      "path": "src/tpmslab/volume.py",
+      "sha256": "482f39f0bd1a0eb113ff276a56263f29190c06df201ed04e20788cd30d49858e"
+    },
+    {
+      "path": "src/tpmslab/web.py",
+      "sha256": "d2ad4ff5307a6c951227a219bf59d2dc8a32904dd5a3e466f385f354e6ddc0ee"
+    }
+  ],
+  "raw_solver_models": "Not bundled; licensed COMSOL can regenerate from configs and scripts"
+}

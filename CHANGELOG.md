@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.0
+
+- Package the verified complementary solid/fluid workflow and independent audits.
+- Include density, refinement, interface, channel and performance records with provenance.
+- Retain the validated numerical implementation from commit 686b783e0385.
+- Clarify geometry/solver response stability and local quality-strategy limitations.
+- GitHub release publication and DOI registration are separate external actions.
+
+
 ## 0.3.0rc1 — solid and pore-fluid domains
 
 - Add complementary solid/fluid meshes with shared interface vertices and faces.
@@ -19,4 +28,4 @@
   consistently in the field helper.
 - Include reproducible comparisons, automated tests and release documentation.
 
-This is an unpublished release candidate, not a record of prior PyPI releases.
+No PyPI release has been made; earlier rc entries describe local release candidates.

@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "Please cite the exact software version used."
+type: software
+title: "TPMS Lab"
+version: "0.3.0"
+authors:
+  - family-names: Chen
+    given-names: Xin
+  - family-names: Akbarzadeh
+    given-names: Abdolhamid
+repository-code: "https://github.com/Slight1211/TPMSLab"
+license: MIT
+abstract: "A Python package for graded complementary solid and pore-fluid meshes with connected-domain metadata and optional verified COMSOL workflows."

@@ -1,0 +1,606 @@
+{
+  "refinement": [
+    {
+      "n": 8,
+      "tetrahedra": 15265,
+      "solid_tetrahedra": 7888,
+      "solid_volume": 52.30691076782543,
+      "fluid_volume": 72.69308923217457,
+      "interface_triangles": 3248,
+      "outlet_flow": 7.239754905474265e-10,
+      "strain_energy": 1.863688243344051e-05
+    },
+    {
+      "n": 12,
+      "tetrahedra": 38292,
+      "solid_tetrahedra": 18305,
+      "solid_volume": 49.175710538748845,
+      "fluid_volume": 75.82428946125115,
+      "interface_triangles": 7392,
+      "outlet_flow": 8.891012544460399e-10,
+      "strain_energy": 1.5487028480255757e-05,
+      "relative_changes": {
+        "solid_volume": 0.06367371604339708,
+        "fluid_volume": 0.04129547736384309,
+        "outlet_flow": 0.1857221132833696,
+        "strain_energy": 0.20338659267014758
+      }
+    },
+    {
+      "n": 16,
+      "tetrahedra": 73958,
+      "solid_tetrahedra": 34831,
+      "solid_volume": 48.07495426538925,
+      "fluid_volume": 76.92504573461075,
+      "interface_triangles": 13200,
+      "outlet_flow": 9.500782566459168e-10,
+      "strain_energy": 1.4147990103787201e-05,
+      "relative_changes": {
+        "solid_volume": 0.022896668133745142,
+        "fluid_volume": 0.014309465309350242,
+        "outlet_flow": 0.06418103116594356,
+        "strain_energy": 0.09464513097942556
+      }
+    },
+    {
+      "n": 20,
+      "tetrahedra": 122806,
+      "solid_tetrahedra": 56775,
+      "solid_volume": 47.67738610325688,
+      "fluid_volume": 77.32261389674312,
+      "interface_triangles": 20640,
+      "outlet_flow": 9.760513662782841e-10,
+      "strain_energy": 1.3500629567374429e-05,
+      "relative_changes": {
+        "solid_volume": 0.008338715576213495,
+        "fluid_volume": 0.005141680319593009,
+        "outlet_flow": 0.02661039216757988,
+        "strain_energy": 0.047950396178351694
+      }
+    },
+    {
+      "n": 24,
+      "tetrahedra": 194241,
+      "solid_tetrahedra": 88426,
+      "solid_volume": 47.41743192741532,
+      "fluid_volume": 77.58256807258468,
+      "interface_triangles": 29896,
+      "outlet_flow": 9.894208606495868e-10,
+      "strain_energy": 1.3094959008556639e-05,
+      "relative_changes": {
+        "solid_volume": 0.005482249149204962,
+        "fluid_volume": 0.0033506776367385653,
+        "outlet_flow": 0.013512444403613204,
+        "strain_energy": 0.0309791392666989
+      }
+    },
+    {
+      "n": 28,
+      "tetrahedra": 282645,
+      "solid_tetrahedra": 125813,
+      "solid_volume": 47.26355663280762,
+      "fluid_volume": 77.73644336719238,
+      "interface_triangles": 40576,
+      "outlet_flow": 9.975170608981145e-10,
+      "strain_energy": 1.2829103787589958e-05,
+      "relative_changes": {
+        "solid_volume": 0.003255685893534508,
+        "fluid_volume": 0.001979448607918202,
+        "outlet_flow": 0.008116352657906698,
+        "strain_energy": 0.02072282096773218
+      }
+    },
+    {
+      "n": 32,
+      "tetrahedra": 391222,
+      "solid_tetrahedra": 173111,
+      "solid_volume": 47.16637637493075,
+      "fluid_volume": 77.83362362506925,
+      "interface_triangles": 52816,
+      "outlet_flow": 1.002617173969068e-09,
+      "strain_energy": 1.264751149763943e-05,
+      "relative_changes": {
+        "solid_volume": 0.002060371504997014,
+        "fluid_volume": 0.0012485639669687833,
+        "outlet_flow": 0.005086800030328276,
+        "strain_energy": 0.014357946223999954
+      }
+    },
+    {
+      "n": 36,
+      "tetrahedra": 526834,
+      "solid_tetrahedra": 230582,
+      "solid_volume": 47.111272248445445,
+      "fluid_volume": 77.88872775155454,
+      "interface_triangles": 66956,
+      "outlet_flow": 1.0059332330981818e-09,
+      "strain_energy": 1.2516783085528771e-05,
+      "relative_changes": {
+        "solid_volume": 0.001169659061523696,
+        "fluid_volume": 0.0007074724170750118,
+        "outlet_flow": 0.0032965002248714504,
+        "strain_energy": 0.010444250029530323
+      }
+    },
+    {
+      "n": 40,
+      "tetrahedra": 688738,
+      "solid_tetrahedra": 297716,
+      "solid_volume": 47.07323047880115,
+      "fluid_volume": 77.92676952119885,
+      "interface_triangles": 82656,
+      "outlet_flow": 1.008131943150718e-09,
+      "strain_energy": 1.2422170877620084e-05,
+      "relative_changes": {
+        "solid_volume": 0.0008081401946999659,
+        "fluid_volume": 0.00048817331807858696,
+        "outlet_flow": 0.0021809744919544603,
+        "strain_energy": 0.007616398843711112
+      }
+    }
+  ],
+  "reference_families": {
+    "Gyroid": {
+      "density": {
+        "family": "Gyroid",
+        "resolution": 12,
+        "target_average": 0.375,
+        "mesh_density": 0.3934056843099908,
+        "slab_z_mm": [
+          0.20833333333333334,
+          0.625,
+          1.0416666666666667,
+          1.4583333333333333,
+          1.875,
+          2.2916666666666665,
+          2.7083333333333335,
+          3.125,
+          3.5416666666666665,
+          3.9583333333333335,
+          4.375,
+          4.791666666666667
+        ],
+        "slab_density": [
+          0.2480237704047233,
+          0.33997213136443377,
+          0.29247987850890017,
+          0.31636903390608323,
+          0.40359395499942236,
+          0.36161620794355165,
+          0.3844705959039238,
+          0.4635832368562233,
+          0.4328831415866029,
+          0.45424477675406166,
+          0.5207890789569898,
+          0.5028424045349741
+        ],
+        "audit": {
+          "interface_triangles": 7392,
+          "invalid_interface_triangles": 0,
+          "missing_interface_triangles": 0,
+          "duplicate_interface_triangles": 0,
+          "nonmanifold_faces": 0,
+          "interface_area_mm2": 145.91411709201782,
+          "valid": true
+        },
+        "relative_target_deviation": 0.049081824826642105,
+        "implicit_midpoint_128": 0.374755859375,
+        "implicit_midpoint_256": 0.3749063014984131
+      },
+      "interface_audit": {
+        "interface_triangles": 7392,
+        "invalid_interface_triangles": 0,
+        "missing_interface_triangles": 0,
+        "duplicate_interface_triangles": 0,
+        "nonmanifold_faces": 0,
+        "interface_area_mm2": 145.91411709201782,
+        "valid": true
+      },
+      "comsol_audit": {
+        "interface_area_comsol_mm2": 145.9141170920193,
+        "interface_area_relative_error": 1.0128758750936909e-14,
+        "channels": [
+          {
+            "domain_id": 2,
+            "inlet_area_mm2": 9.80058739706724,
+            "outlet_area_mm2": 6.661303268409522,
+            "inlet_outward_flux_m3_s": -4.81607256205022e-10,
+            "outlet_flux_m3_s": 4.816072545718786e-10,
+            "relative_flux_imbalance": 3.391027227205645e-09,
+            "solver_domain_ids": [
+              1
+            ],
+            "tetrahedra": 9978,
+            "volume_mm3": 37.89710782705654,
+            "inlet_area_mesh_mm2": 9.800587397067229,
+            "inlet_area_relative_error": 1.0875002287710726e-15,
+            "outlet_area_mesh_mm2": 6.661303268409526,
+            "outlet_area_relative_error": 5.333361259273155e-16
+          },
+          {
+            "domain_id": 3,
+            "inlet_area_mm2": 9.800587397067272,
+            "outlet_area_mm2": 6.661303268409521,
+            "inlet_outward_flux_m3_s": -4.074939855108338e-10,
+            "outlet_flux_m3_s": 4.0749399987416043e-10,
+            "relative_flux_imbalance": 3.524794635037065e-08,
+            "solver_domain_ids": [
+              3
+            ],
+            "tetrahedra": 10009,
+            "volume_mm3": 37.92718163419461,
+            "inlet_area_mesh_mm2": 9.800587397067229,
+            "inlet_area_relative_error": 4.3500009150842905e-15,
+            "outlet_area_mesh_mm2": 6.661303268409528,
+            "outlet_area_relative_error": 1.0666722518546306e-15
+          }
+        ],
+        "channel_sum_inlet_m3_s": -8.891012417158558e-10,
+        "channel_sum_outlet_m3_s": 8.891012544460391e-10,
+        "interface_area_mesh_mm2": 145.91411709201782
+      },
+      "source_mph_sha256": "70d4e353769b2b40582605371bacd0c7ba3bd1f0bd162da79b74a23afdf986f6"
+    },
+    "Primitive Schwartz": {
+      "density": {
+        "family": "Primitive Schwartz",
+        "resolution": 12,
+        "target_average": 0.375,
+        "mesh_density": 0.38337930092161776,
+        "slab_z_mm": [
+          0.20833333333333334,
+          0.625,
+          1.0416666666666667,
+          1.4583333333333333,
+          1.875,
+          2.2916666666666665,
+          2.7083333333333335,
+          3.125,
+          3.5416666666666665,
+          3.9583333333333335,
+          4.375,
+          4.791666666666667
+        ],
+        "slab_density": [
+          0.34610639075136135,
+          0.267701415175646,
+          0.24648541423702924,
+          0.2656163350811696,
+          0.3382139265959056,
+          0.4523130751377803,
+          0.4728696289831805,
+          0.41382963055283,
+          0.3626841397422548,
+          0.38358775048844834,
+          0.48618073598315,
+          0.5649631683306585
+        ],
+        "audit": {
+          "interface_triangles": 5608,
+          "invalid_interface_triangles": 0,
+          "missing_interface_triangles": 0,
+          "duplicate_interface_triangles": 0,
+          "nonmanifold_faces": 0,
+          "interface_area_mm2": 109.10991522706928,
+          "valid": true
+        },
+        "relative_target_deviation": 0.02234480245764736,
+        "implicit_midpoint_128": 0.37449073791503906,
+        "implicit_midpoint_256": 0.37451839447021484
+      },
+      "interface_audit": {
+        "interface_triangles": 5608,
+        "invalid_interface_triangles": 0,
+        "missing_interface_triangles": 0,
+        "duplicate_interface_triangles": 0,
+        "nonmanifold_faces": 0,
+        "interface_area_mm2": 109.10991522706928,
+        "valid": true
+      },
+      "comsol_audit": {
+        "interface_area_comsol_mm2": 109.10991522706988,
+        "interface_area_relative_error": 5.470226026629788e-15,
+        "channels": [
+          {
+            "domain_id": 2,
+            "inlet_area_mm2": 8.03156411587118,
+            "outlet_area_mm2": 5.203786547741691,
+            "inlet_outward_flux_m3_s": -1.7695087675669049e-10,
+            "outlet_flux_m3_s": 1.7695087729605446e-10,
+            "relative_flux_imbalance": 3.048100013331976e-09,
+            "solver_domain_ids": [
+              1
+            ],
+            "tetrahedra": 8228,
+            "volume_mm3": 37.30129748771106,
+            "inlet_area_mesh_mm2": 8.03156411587119,
+            "inlet_area_relative_error": 1.1058598386147402e-15,
+            "outlet_area_mesh_mm2": 5.203786547741698,
+            "outlet_area_relative_error": 1.3654340531481954e-15
+          },
+          {
+            "domain_id": 3,
+            "inlet_area_mm2": 8.031564115871195,
+            "outlet_area_mm2": 5.203786547741678,
+            "inlet_outward_flux_m3_s": -2.69047531315413e-10,
+            "outlet_flux_m3_s": 2.6904753158661723e-10,
+            "relative_flux_imbalance": 1.0080161004251198e-09,
+            "solver_domain_ids": [
+              3
+            ],
+            "tetrahedra": 8272,
+            "volume_mm3": 39.77628989708673,
+            "inlet_area_mesh_mm2": 8.03156411587119,
+            "inlet_area_relative_error": 6.635159031688441e-16,
+            "outlet_area_mesh_mm2": 5.203786547741695,
+            "outlet_area_relative_error": 3.2429058762269663e-15
+          }
+        ],
+        "channel_sum_inlet_m3_s": -4.4599840807210344e-10,
+        "channel_sum_outlet_m3_s": 4.459984088826717e-10,
+        "interface_area_mesh_mm2": 109.10991522706928
+      },
+      "source_mph_sha256": "1317ea8071d36b3030839dad9bad573db240b6cebbe4255edbb2b827d5e077ca"
+    },
+    "Diamond": {
+      "density": {
+        "family": "Diamond",
+        "resolution": 12,
+        "target_average": 0.375,
+        "mesh_density": 0.4016388610873596,
+        "slab_z_mm": [
+          0.20833333333333334,
+          0.625,
+          1.0416666666666667,
+          1.4583333333333333,
+          1.875,
+          2.2916666666666665,
+          2.7083333333333335,
+          3.125,
+          3.5416666666666665,
+          3.9583333333333335,
+          4.375,
+          4.791666666666667
+        ],
+        "slab_density": [
+          0.29872892096440423,
+          0.23939613536478446,
+          0.34773481547793345,
+          0.3849471388867957,
+          0.30901962542072137,
+          0.4331849144423839,
+          0.4362497215257549,
+          0.35492090927875897,
+          0.4825080833997042,
+          0.5287182035173625,
+          0.44084708789230975,
+          0.5634107768774045
+        ],
+        "audit": {
+          "interface_triangles": 9072,
+          "invalid_interface_triangles": 0,
+          "missing_interface_triangles": 0,
+          "duplicate_interface_triangles": 0,
+          "nonmanifold_faces": 0,
+          "interface_area_mm2": 182.61950379146603,
+          "valid": true
+        },
+        "relative_target_deviation": 0.07103696289962554,
+        "implicit_midpoint_128": 0.3751792907714844,
+        "implicit_midpoint_256": 0.37493276596069336
+      },
+      "interface_audit": {
+        "interface_triangles": 9072,
+        "invalid_interface_triangles": 0,
+        "missing_interface_triangles": 0,
+        "duplicate_interface_triangles": 0,
+        "nonmanifold_faces": 0,
+        "interface_area_mm2": 182.61950379146603,
+        "valid": true
+      },
+      "comsol_audit": {
+        "interface_area_comsol_mm2": 182.61950379146577,
+        "interface_area_relative_error": 1.4007013465863421e-15,
+        "channels": [
+          {
+            "domain_id": 2,
+            "inlet_area_mm2": 8.04085249637969,
+            "outlet_area_mm2": 5.226897517771786,
+            "inlet_outward_flux_m3_s": -1.949926689647701e-10,
+            "outlet_flux_m3_s": 1.9499224105033762e-10,
+            "relative_flux_imbalance": 2.1945154899560267e-06,
+            "solver_domain_ids": [
+              3
+            ],
+            "tetrahedra": 10744,
+            "volume_mm3": 37.397571182040025,
+            "inlet_area_mesh_mm2": 8.04085249637969,
+            "inlet_area_relative_error": 0.0,
+            "outlet_area_mesh_mm2": 5.226897517771816,
+            "outlet_area_relative_error": 5.777436073144486e-15
+          },
+          {
+            "domain_id": 3,
+            "inlet_area_mm2": 8.040852496379689,
+            "outlet_area_mm2": 5.226897517771791,
+            "inlet_outward_flux_m3_s": -2.2930941641014622e-10,
+            "outlet_flux_m3_s": 2.2931183827957502e-10,
+            "relative_flux_imbalance": 1.056146707023973e-05,
+            "solver_domain_ids": [
+              2
+            ],
+            "tetrahedra": 10744,
+            "volume_mm3": 37.397571182040025,
+            "inlet_area_mesh_mm2": 8.04085249637969,
+            "inlet_area_relative_error": 2.2091648120644378e-16,
+            "outlet_area_mesh_mm2": 5.226897517771817,
+            "outlet_area_relative_error": 4.927813121211472e-15
+          }
+        ],
+        "channel_sum_inlet_m3_s": -4.243020853749163e-10,
+        "channel_sum_outlet_m3_s": 4.243040793299126e-10,
+        "interface_area_mesh_mm2": 182.61950379146603
+      },
+      "source_mph_sha256": "b884f38a19cd1f4794d57ec07174a10875b66bf1600b159253de11718f706dd8"
+    }
+  },
+  "performance": [
+    {
+      "n": 8,
+      "tetrahedra": 15265,
+      "generation_s": {
+        "median": 1.2549497000291012,
+        "min": 1.2503711000317708,
+        "max": 1.282313100004103
+      },
+      "export_s": {
+        "median": 0.15408589999424294,
+        "min": 0.1435407999670133,
+        "max": 0.15864049998344854
+      },
+      "peak_process_rss_mib": {
+        "median": 114.23828125,
+        "min": 114.16015625,
+        "max": 114.44921875
+      }
+    },
+    {
+      "n": 12,
+      "tetrahedra": 38292,
+      "generation_s": {
+        "median": 3.034217800013721,
+        "min": 3.0040751000051387,
+        "max": 3.0414005999919027
+      },
+      "export_s": {
+        "median": 0.2689004999701865,
+        "min": 0.25434109999332577,
+        "max": 0.27461540000513196
+      },
+      "peak_process_rss_mib": {
+        "median": 137.30078125,
+        "min": 135.66015625,
+        "max": 137.6796875
+      }
+    },
+    {
+      "n": 16,
+      "tetrahedra": 73958,
+      "generation_s": {
+        "median": 5.611195700010285,
+        "min": 5.537020699994173,
+        "max": 5.618396100006066
+      },
+      "export_s": {
+        "median": 0.42654259997652844,
+        "min": 0.41519010002957657,
+        "max": 0.44587850000243634
+      },
+      "peak_process_rss_mib": {
+        "median": 171.7578125,
+        "min": 171.73828125,
+        "max": 171.9140625
+      }
+    },
+    {
+      "n": 20,
+      "tetrahedra": 122806,
+      "generation_s": {
+        "median": 8.72076900000684,
+        "min": 8.70942119997926,
+        "max": 8.737953300005756
+      },
+      "export_s": {
+        "median": 0.6374291999964043,
+        "min": 0.6222080999868922,
+        "max": 0.6448551000212319
+      },
+      "peak_process_rss_mib": {
+        "median": 218.1796875,
+        "min": 217.92578125,
+        "max": 218.6640625
+      }
+    }
+  ],
+  "quality": [
+    {
+      "mode": "solid_fluid",
+      "strategy": "pulling",
+      "tetrahedra": 30804,
+      "quality": {
+        "min": 0.0023957102919290327,
+        "p01": 0.013771390769353633,
+        "median": 0.556572920164068,
+        "max": 0.9603149822008616
+      },
+      "low_quality_count": 166,
+      "stationary_solver_s": 8.0,
+      "outer_iterations": 4
+    },
+    {
+      "mode": "solid",
+      "strategy": "pulling",
+      "tetrahedra": 14532,
+      "quality": {
+        "min": 0.0023957102919290327,
+        "p01": 0.012181631204117234,
+        "median": 0.4945760687462285,
+        "max": 0.9603149822008616
+      },
+      "low_quality_count": 107,
+      "stationary_solver_s": 1.0,
+      "outer_iterations": 1
+    },
+    {
+      "mode": "solid_fluid",
+      "strategy": "quality_fan",
+      "tetrahedra": 38292,
+      "quality": {
+        "min": 0.0037020277795775177,
+        "p01": 0.02346991391338411,
+        "median": 0.45216928562552766,
+        "max": 0.9632394896297612
+      },
+      "low_quality_count": 20,
+      "stationary_solver_s": 13.0,
+      "outer_iterations": 5
+    },
+    {
+      "mode": "solid",
+      "strategy": "quality_fan",
+      "tetrahedra": 18305,
+      "quality": {
+        "min": 0.008005631137322671,
+        "p01": 0.023281231931134308,
+        "median": 0.4218748919486598,
+        "max": 0.9632394896297612
+      },
+      "low_quality_count": 5,
+      "stationary_solver_s": 1.0,
+      "outer_iterations": 1
+    }
+  ],
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "cpu": {
+      "Name": "13th Gen Intel(R) Core(TM) i5-13400EF",
+      "NumberOfCores": 10,
+      "NumberOfLogicalProcessors": 16
+    },
+    "ram_bytes": 17010540544,
+    "ram_gib": 15.842300415039062,
+    "dependencies": {
+      "numpy": "2.3.5",
+      "scipy": "1.18.1",
+      "trimesh": "5.1.0",
+      "matplotlib": "3.11.1",
+      "vtk": "9.6.2"
+    },
+    "comsol": "6.3.0.290",
+    "comsol_requested_cores": 2,
+    "performance_repeats": 3,
+    "performance_memory": "peak process RSS after export, includes Python/import overhead; excludes COMSOL and independent post-export audit",
+    "measurement_date": "2026-09-25"
+  }
+}

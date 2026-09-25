@@ -1,0 +1,23 @@
+{
+  "python": "3.12.14",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu": {
+    "Name": "13th Gen Intel(R) Core(TM) i5-13400EF",
+    "NumberOfCores": 10,
+    "NumberOfLogicalProcessors": 16
+  },
+  "ram_bytes": 17010540544,
+  "ram_gib": 15.842300415039062,
+  "dependencies": {
+    "numpy": "2.3.5",
+    "scipy": "1.18.1",
+    "trimesh": "5.1.0",
+    "matplotlib": "3.11.1",
+    "vtk": "9.6.2"
+  },
+  "comsol": "6.3.0.290",
+  "comsol_requested_cores": 2,
+  "performance_repeats": 3,
+  "performance_memory": "peak process RSS after export, includes Python/import overhead; excludes COMSOL and independent post-export audit",
+  "measurement_date": "2026-09-25"
+}

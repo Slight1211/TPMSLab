@@ -1,0 +1,17 @@
+{
+  "code_commit.json": "5f1579a24fa0003bd336af75210ab621d8aad1171a9962af90648a661655c341",
+  "density/density_results.json": "326ad53f52b6d433c4c3c0bc1cceb42f8cb35760c0ca006b62b00eb6697d21c5",
+  "environment.json": "9741e2b9aafb21035297dcdad5ad6985dc1f20aa54d07a793a963ec2e1170505",
+  "existing_Diamond_audit/audit.json": "4cc737ee012ddd918c523b6a830329f31036e81fb8134c373657061f6d1a6565",
+  "existing_Gyroid_audit/audit.json": "318929894d60bfcae95a998d9d72cf02a12d40a974316f1637b314ffbded22c6",
+  "existing_Primitive_Schwartz_audit/audit.json": "98ffe56c047a2ac57f0101199ef0dda36a001679180675e851184b05c1ea0ad8",
+  "performance_summary.csv": "ad7af90c9c27f92eb3bf397b6783ee17947529cc49575cd087e8d70c9d8a6f59",
+  "provenance.json": "b348b8621af2c16900d59354584ee5ddd3b48df6ca11beb23b79211da4103828",
+  "quality_summary.csv": "51b071d125bbb893820682eb7191b3235a1ff0b8d66f7b8391146b04b3b7b109",
+  "README.md": "adc78d63fcca8c4d739698ab9e4967de01506ae10213a9b20626471a002ea797",
+  "reference_configs/Diamond.json": "22af714d6cfb7e30811e5271b193a0aa7e43b0e978f8b2d164aa6983df0f5799",
+  "reference_configs/Gyroid.json": "ad7a7471cd0ec4b4c848ff06b45f362bbc9e6837ff664cf8c3389652d8b4baa7",
+  "reference_configs/Primitive_Schwartz.json": "12d04772c234f1d8ce789cc567fa3735c2a7a265499094726eef62a48f2f792e",
+  "refinement_summary.csv": "81c9ce9b87940c53064902ff12d823719eb88159020d5e143239dd7be1a09b80",
+  "summary.json": "79bac0581f22ab6d03e9abcdeef9cb5401e1e8be872918726e0b52bbb2f0ba7d"
+}

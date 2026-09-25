@@ -3,8 +3,9 @@
 [English quick start](docs/QUICKSTART_EN.md) | [中文使用说明](docs/QUICKSTART_ZH.md)
 
 An installable Python toolkit for graded TPMS-derived **solid and complementary pore-fluid volume meshes**.
-Release candidate 0.3.0rc1; distribution name is provisional until registry and
-maintainer checks are complete. No PyPI release has been made.
+Version 0.3.0. Source, tests, examples and reproducibility records are bundled together.
+No PyPI release has been made. GitHub release and permanent archive status must
+be checked at the repository release page.
 
 ## Install
 
@@ -35,7 +36,7 @@ save_model(mesh, "gyroid_result")  # destination must not exist
 `generate` also accepts a dictionary. `list_families()` returns formula metadata.
 Coordinates are millimetres; array connectivity is zero-based. The returned
 mapping contains `points`, `tetra`, `boundary`, `boundary_ids`, `domains`,
-`surface` (a trimesh object) and `report`. This prerelease API may change before
+`surface` (a trimesh object) and `report`. This API may change before
 1.0. Configuration objects normalize sequence fields to immutable tuples.
 
 ## Command line
@@ -171,3 +172,10 @@ files and optional COMSOL calculations are documented in the
 ## Independent verification
 
 See [Verification and reproducible studies](docs/VERIFICATION.md) for density realization, independent interface incidence and area audits, channel-wise COMSOL flux checks, and refinement/performance scripts. `quality_fan` is optional local worst-element mitigation, not a general quality or solver-speed guarantee.
+
+## Reproducibility records
+
+See [validation/README.md](validation/README.md) for the numerical records,
+configuration provenance and reproduction commands corresponding to the verified
+workflow. The package provides mesh-defined simulation domains, not smooth CAD
+reconstruction or coupled FSI.

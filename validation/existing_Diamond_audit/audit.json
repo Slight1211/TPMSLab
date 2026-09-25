@@ -1,0 +1,35 @@
+{
+  "interface_area_comsol_mm2": 182.61950379146577,
+  "interface_area_relative_error": 1.4007013465863421e-15,
+  "channels": [
+    {
+      "domain_id": 2,
+      "inlet_area_mm2": 8.04085249637969,
+      "outlet_area_mm2": 5.226897517771786,
+      "inlet_outward_flux_m3_s": -1.949926689647701e-10,
+      "outlet_flux_m3_s": 1.9499224105033762e-10,
+      "relative_flux_imbalance": 2.1945154899560267e-06,
+      "solver_domain_ids": [
+        3
+      ],
+      "tetrahedra": 10744,
+      "volume_mm3": 37.397571182040025
+    },
+    {
+      "domain_id": 3,
+      "inlet_area_mm2": 8.040852496379689,
+      "outlet_area_mm2": 5.226897517771791,
+      "inlet_outward_flux_m3_s": -2.2930941641014622e-10,
+      "outlet_flux_m3_s": 2.2931183827957502e-10,
+      "relative_flux_imbalance": 1.056146707023973e-05,
+      "solver_domain_ids": [
+        2
+      ],
+      "tetrahedra": 10744,
+      "volume_mm3": 37.397571182040025
+    }
+  ],
+  "channel_sum_inlet_m3_s": -4.243020853749163e-10,
+  "channel_sum_outlet_m3_s": 4.243040793299126e-10,
+  "interface_area_mesh_mm2": 182.61950379146603
+}
