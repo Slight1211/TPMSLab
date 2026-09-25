@@ -96,16 +96,15 @@ python -m twine check dist/*
 python benchmarks/run_benchmarks.py --out benchmark_results
 ```
 
-See `docs/METHOD.md`, `docs/RELEASE_CHECKLIST.md` and the validation records.
+See `docs/METHOD.md`, `docs/SOLID_FLUID.md` and `docs/VALIDATION.md`.
 The CI matrix is configured for Windows/Linux and Python 3.11/3.12; configuring
 CI does not mean those jobs have run. The measured local environment is Windows
 and Python 3.12. Optional COMSOL validation is separate from the open test suite.
 
 ## Licence and attribution
 
-MIT. Third-party formula and browser-library notices are preserved. Maintainer,
-author list, repository URL and archive DOI must be finalized before public
-release. No public adoption or independently published application is claimed.
+MIT. See `LICENSE`, `THIRD_PARTY_NOTICES.md` and `licenses/` for the
+package licence and third-party formula and browser-library notices.
 
 ## Solid and pore-fluid domains (0.3)
 
@@ -162,9 +161,9 @@ not a validated permeability prediction. Boundary layers, external reservoirs,
 mesh convergence and realistic boundary conditions remain user responsibilities.
 See `docs/SOLID_FLUID.md` for validation and reproducibility.
 
-## Solid–fluid quick start and manuscript
+## Solid–fluid quick start
 
-See [the callable solid–fluid example](examples/solid_fluid_api.py) and
-[Chinese usage instructions](docs/QUICKSTART_ZH.md). The SoftwareX draft,
-LaTeX sources and actual geometry/COMSOL figures are in [paper/](paper/).
-Author details and public version links remain to be completed before submission.
+Run [the Python example](examples/solid_fluid_api.py). Installation, exported
+files and optional COMSOL calculations are documented in the
+[English quick start](docs/QUICKSTART_EN.md) and
+[中文使用说明](docs/QUICKSTART_ZH.md).

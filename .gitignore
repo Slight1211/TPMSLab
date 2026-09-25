@@ -19,3 +19,8 @@ venv/
 *.out
 *.blg
 results/
+
+# Locally retained publication preparation material
+/paper/
+/docs/RELEASE_CHECKLIST.md
+/Licence.txt
