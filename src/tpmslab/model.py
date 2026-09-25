@@ -169,8 +169,8 @@ class Config:
             raise ValueError("三个外形尺寸必须在 0.1–1000 mm 之间。")
         if len(self.cells) != 3 or any(type(v) is not int or not 1 <= v <= 6 for v in self.cells):
             raise ValueError("胞元数必须为 1–6 的整数。")
-        if type(self.resolution) is not int or not 12 <= self.resolution <= 64:
-            raise ValueError("每胞元采样数必须为 12–64 的整数。")
+        if type(self.resolution) is not int or not 8 <= self.resolution <= 64:
+            raise ValueError("每胞元采样数必须为 8–64 的整数。")
         if np.prod(np.array(self.cells) * self.resolution) > 200_000:
             raise ValueError("背景立方网格超过 20 万，请减少胞元数或分辨率。")
         for v in (self.density_start, self.density_end):

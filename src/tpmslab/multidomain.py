@@ -138,6 +138,8 @@ def generate_solid_fluid(config, progress):
         partition_volume_error_mm3=float(abs(volumes.sum() - expected)),
         interface_triangles=len(interface),
         interface_conforming=True,
+        interface_invalid_triangles=int(np.sum(counts[inverse[interface]] != 2)),
+        interface_area_mm2=float(np.linalg.norm(na[interface_pair], axis=1).sum() / 2),
         boundary_tag_names={
             **{
                 str(2 + i): "solid_" + name

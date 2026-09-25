@@ -4,3 +4,6 @@ recursive-include docs *.md *.m
 recursive-include examples *.json *.py
 recursive-include tests *.py
 recursive-include benchmarks *.py
+
+exclude docs/RELEASE_CHECKLIST.md
+prune paper

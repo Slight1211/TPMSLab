@@ -81,7 +81,7 @@ custom-formula parser. Built-in formulas are adapted from LattGen; see
 `THIRD_PARTY_NOTICES.md`. They are not claimed as new TPMS families or exact
 minimal surfaces. Density targets are periodic-cell calibrations, not guaranteed
 finite-specimen volume fractions. Current bounds: box domains, 1–6 cells per
-axis, 12–64 samples per cell and at most 200,000 background voxels. The built-in
+axis, 8–64 samples per cell and at most 200,000 background voxels. The built-in
 static demo is limited to 180,000 tetrahedra and connected material. Top/bottom
 contact, constraints and convergence must be checked for a research model.
 
@@ -167,3 +167,7 @@ Run [the Python example](examples/solid_fluid_api.py). Installation, exported
 files and optional COMSOL calculations are documented in the
 [English quick start](docs/QUICKSTART_EN.md) and
 [中文使用说明](docs/QUICKSTART_ZH.md).
+
+## Independent verification
+
+See [Verification and reproducible studies](docs/VERIFICATION.md) for density realization, independent interface incidence and area audits, channel-wise COMSOL flux checks, and refinement/performance scripts. `quality_fan` is optional local worst-element mitigation, not a general quality or solver-speed guarantee.

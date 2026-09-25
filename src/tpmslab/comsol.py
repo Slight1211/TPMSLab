@@ -162,14 +162,24 @@ def export_java(folder, report, solve=False, material=None):
     return folder / "TPMSBuild.java"
 
 
-def build_mph(folder, report, solve=False, material=None, progress=lambda s: None):
+def build_mph(
+    folder,
+    report,
+    solve=False,
+    material=None,
+    progress=lambda s: None,
+    *,
+    max_solve_tetrahedra=180_000,
+):
+    if type(max_solve_tetrahedra) is not int or not 1 <= max_solve_tetrahedra <= 1_000_000:
+        raise ValueError("max_solve_tetrahedra must be an integer in [1, 1000000]")
     folder = Path(folder).resolve()
     exe = detect_comsol()
     if not exe:
         raise RuntimeError("未找到 COMSOL。已提供 NAS；请设置 COMSOL_BIN 后再创建 MPH。")
-    if solve and report["tetrahedra"] > 180000:
+    if solve and report["tetrahedra"] > max_solve_tetrahedra:
         raise ValueError(
-            "演示求解上限为 18 万体单元，请降低采样数；大型模型可导出 MPH 后自行求解。"
+            f"演示求解上限为 {max_solve_tetrahedra:,} 个体单元；请降低采样数或明确设置研究用上限。"
         )
     java = export_java(folder, report, solve, material)
     flags = subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0
