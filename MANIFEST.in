@@ -10,4 +10,3 @@ prune paper
 
 recursive-include validation *.json *.csv *.md
 include CITATION.cff .zenodo.json
-include Licence.txt

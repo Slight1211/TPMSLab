@@ -3,9 +3,16 @@
 [English quick start](docs/QUICKSTART_EN.md) | [中文使用说明](docs/QUICKSTART_ZH.md)
 
 An installable Python toolkit for graded TPMS-derived **solid and complementary pore-fluid volume meshes**.
-Version 0.3.0. Source, tests, examples and reproducibility records are bundled together.
-No PyPI release has been made. GitHub release and permanent archive status must
-be checked at the repository release page.
+Version 0.3.0. This repository is public. Source, tests, examples and versioned
+reproducibility records are distributed together. Use an exact commit or the
+`v0.3.0` tag, rather than a changing `main`, for reproducible work.
+
+[Version and installation details](docs/VERSION_0.3.0.md) |
+[GitHub releases](https://github.com/Slight1211/TPMSLab/releases)
+
+A public source repository, a GitHub Release, a Zenodo archive and a PyPI upload
+are separate records. Cite a DOI only after the archive is actually published.
+No PyPI release has been made.
 
 ## Install
 

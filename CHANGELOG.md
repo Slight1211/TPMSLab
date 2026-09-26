@@ -6,7 +6,8 @@
 - Include density, refinement, interface, channel and performance records with provenance.
 - Retain the validated numerical implementation from commit 686b783e0385.
 - Clarify geometry/solver response stability and local quality-strategy limitations.
-- GitHub release publication and DOI registration are separate external actions.
+- Add isolated-wheel reference checks, exact-commit release preparation and public version documentation.
+- Preserve historical validation provenance; GitHub publication and DOI registration remain separate records.
 
 
 ## 0.3.0rc1 — solid and pore-fluid domains

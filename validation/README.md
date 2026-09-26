@@ -32,3 +32,13 @@ Saved MPH files are not distributed in this small evidence set. The scripts
 regenerate models and verify save/reopen behavior. The numerical records are
 included in the source distribution, with a separate SHA-256 manifest. No
 manuscript or submission instructions are stored in this software repository.
+
+## Hash conventions
+
+The original Windows evidence hashes are retained in
+`historical_windows_checksums.json`. Git normalizes text line endings, so those
+byte hashes need not match downloaded GitHub archives. `checksums.json` verifies
+the current validation files after CRLF-to-LF normalization. Module provenance
+retains the original `sha256` and adds `git_lf_sha256`, independently checked
+against the historical baseline Git archive. Only line endings differ in the
+unchanged numerical modules. No historical numerical values were regenerated.

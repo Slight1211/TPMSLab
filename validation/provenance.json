@@ -5,52 +5,68 @@
   "algorithm_files_unchanged": [
     {
       "path": "src/tpmslab/__main__.py",
-      "sha256": "482b8693e2fe6dbd732e3d7961e03827d3efa187bad11d29da188be580ebbeea"
+      "sha256": "482b8693e2fe6dbd732e3d7961e03827d3efa187bad11d29da188be580ebbeea",
+      "git_lf_sha256": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d"
     },
     {
       "path": "src/tpmslab/cli.py",
-      "sha256": "c2d65ff2bd0f3c93fdb3d4915c90ecdadbb4965cfa8d71321b84aa875a8eaf53"
+      "sha256": "c2d65ff2bd0f3c93fdb3d4915c90ecdadbb4965cfa8d71321b84aa875a8eaf53",
+      "git_lf_sha256": "a67c1669635bef9706b119014ba9cda3d9ed8b38536b54dc8d0dfa61aaf4d1a3"
     },
     {
       "path": "src/tpmslab/comsol.py",
-      "sha256": "2cc06f2d872b406485e25f0e551166d131abf7025a97ca2b5a49c1b777dd3175"
+      "sha256": "2cc06f2d872b406485e25f0e551166d131abf7025a97ca2b5a49c1b777dd3175",
+      "git_lf_sha256": "56d0a104fa7da7b5341bf954af53470e906a0faad621e5e7f90e01a02b028bb7"
     },
     {
       "path": "src/tpmslab/comsol_audit.py",
-      "sha256": "ea0256456e79d4be4506585e84ee8b3f98f325478216ce66cf1a33e9eee32762"
+      "sha256": "ea0256456e79d4be4506585e84ee8b3f98f325478216ce66cf1a33e9eee32762",
+      "git_lf_sha256": "a9cebce7c791a03f09436f65d7c2e0b9b020c30f24cb51d59ffa86cb59e009d1"
     },
     {
       "path": "src/tpmslab/comsol_dual.py",
-      "sha256": "21882422db4fe2a5e2452389ad48c3085cb09cd3f42c9aec25de7a39ac92a6d1"
+      "sha256": "21882422db4fe2a5e2452389ad48c3085cb09cd3f42c9aec25de7a39ac92a6d1",
+      "git_lf_sha256": "21882422db4fe2a5e2452389ad48c3085cb09cd3f42c9aec25de7a39ac92a6d1"
     },
     {
       "path": "src/tpmslab/io.py",
-      "sha256": "146163e3b1dedec4891db8dda01da83088331d2cfd14432ac1f2073245599f9a"
+      "sha256": "146163e3b1dedec4891db8dda01da83088331d2cfd14432ac1f2073245599f9a",
+      "git_lf_sha256": "4d94e4bf3826c7f52de829caa2f118ae62ef46ec14bc03c55e968ceb6ae4eff1"
     },
     {
       "path": "src/tpmslab/model.py",
-      "sha256": "89815d7dc19fc0f629367b0bf46f350698b7aba64a61a319767faecd152792d5"
+      "sha256": "89815d7dc19fc0f629367b0bf46f350698b7aba64a61a319767faecd152792d5",
+      "git_lf_sha256": "aaa44989536755069efb161a4d85e2f3a71e5f0aeb422590ff641ddd1a44a68b"
     },
     {
       "path": "src/tpmslab/multidomain.py",
-      "sha256": "5ec92d9bdfe2cb7d3b83a000a116b0ca0c577e849903886248b92f91e5246d8e"
+      "sha256": "5ec92d9bdfe2cb7d3b83a000a116b0ca0c577e849903886248b92f91e5246d8e",
+      "git_lf_sha256": "302dae40b3c65c72ea2244fa9d199248560c763cbd56f0f054b22ec59be2d16d"
     },
     {
       "path": "src/tpmslab/quality.py",
-      "sha256": "024211353cab1893cae63d4e0a63fc6dd4455e517cf53ac2f7b8d54cdd71b5ae"
+      "sha256": "024211353cab1893cae63d4e0a63fc6dd4455e517cf53ac2f7b8d54cdd71b5ae",
+      "git_lf_sha256": "4d51e2c408fafaf33e4fc1380115bce9e42efa764d5d41fa81e7cbb0a082f283"
     },
     {
       "path": "src/tpmslab/verification.py",
-      "sha256": "e08fdf965d8352765eba24872a2fed2c44d079c2dd0c8c4355499b90a0e14ed9"
+      "sha256": "e08fdf965d8352765eba24872a2fed2c44d079c2dd0c8c4355499b90a0e14ed9",
+      "git_lf_sha256": "e08fdf965d8352765eba24872a2fed2c44d079c2dd0c8c4355499b90a0e14ed9"
     },
     {
       "path": "src/tpmslab/volume.py",
-      "sha256": "482f39f0bd1a0eb113ff276a56263f29190c06df201ed04e20788cd30d49858e"
+      "sha256": "482f39f0bd1a0eb113ff276a56263f29190c06df201ed04e20788cd30d49858e",
+      "git_lf_sha256": "580cf0f140b4e9b8a303e2ff109309ba7119b03291ec2091a2802a401b362dad"
     },
     {
       "path": "src/tpmslab/web.py",
-      "sha256": "d2ad4ff5307a6c951227a219bf59d2dc8a32904dd5a3e466f385f354e6ddc0ee"
+      "sha256": "d2ad4ff5307a6c951227a219bf59d2dc8a32904dd5a3e466f385f354e6ddc0ee",
+      "git_lf_sha256": "a8d76f011cc577439c5b1f18811b467c1249f08e05bff7d1355f9d030d5706c2"
     }
   ],
-  "raw_solver_models": "Not bundled; licensed COMSOL can regenerate from configs and scripts"
+  "raw_solver_models": "Not bundled; licensed COMSOL can regenerate from configs and scripts",
+  "hash_conventions": {
+    "sha256": "Original historical Windows-file bytes; preserved unchanged",
+    "git_lf_sha256": "Git source text with CRLF normalized to LF; verified against baseline archive"
+  }
 }
