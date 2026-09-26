@@ -10,3 +10,5 @@ prune paper
 
 recursive-include validation *.json *.csv *.md
 include CITATION.cff .zenodo.json
+
+include docs/runtime_hashes_0.3.1.json

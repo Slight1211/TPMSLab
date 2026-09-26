@@ -34,13 +34,21 @@ def main():
     installed = Path(tpmslab.__file__).resolve().parent
     if installed == src / "src" / "tpmslab":
         raise RuntimeError("Install the wheel first; this check must use the installed package")
-    assert importlib.metadata.version("tpmslab") == "0.3.0"
+    installed_version = importlib.metadata.version("tpmslab")
+    assert installed_version in {"0.3.0", "0.3.1"}
     provenance = json.loads((src / "validation/provenance.json").read_text(encoding="utf8"))
-    for record in provenance["algorithm_files_unchanged"]:
-        original = src / record["path"]
-        packaged = installed / Path(record["path"]).name
-        assert digest(original) == record["git_lf_sha256"], record["path"]
-        assert digest(packaged) == record["git_lf_sha256"], packaged
+    if installed_version == "0.3.0":
+        for record in provenance["algorithm_files_unchanged"]:
+            original = src / record["path"]
+            packaged = installed / Path(record["path"]).name
+            assert digest(original) == record["git_lf_sha256"], record["path"]
+            assert digest(packaged) == record["git_lf_sha256"], packaged
+    else:
+        # Localized messages change source bytes; preserve the historical manifest.
+        hashes = json.loads((src / "docs/runtime_hashes_0.3.1.json").read_text())
+        for filename, expected in hashes.items():
+            assert digest(src / "src/tpmslab" / filename) == expected, filename
+            assert digest(installed / filename) == expected, filename
     checksums = json.loads((src / "validation/checksums.json").read_text(encoding="utf8"))
     for relative, expected in checksums.items():
         assert digest(src / "validation" / relative) == expected, relative

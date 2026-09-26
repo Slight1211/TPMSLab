@@ -94,7 +94,7 @@ def generate_task(job, config):
         model = generate_volume(config, lambda msg: progress(job, msg))
         save_model(model, job["folder"])
         job.update(model=model, report=model["report"], status="ready")
-        progress(job, "实体计算域已生成，可导出 NAS 或创建 MPH。")
+        progress(job, "The computational volume was generated. Export NAS or create an MPH model.")
     except Exception as exc:
         logging.exception("generation failed")
         job.update(status="error", error=str(exc))
@@ -113,7 +113,7 @@ def generate():
         return jsonify(error=str(exc)), 400
     with LOCK:
         if BUSY:
-            return jsonify(error="已有任务在运行，请等待完成。"), 409
+            return jsonify(error="A job is already running. Wait for it to finish."), 409
         BUSY = True
         # Free old in-memory meshes; generated files remain on disk.
         for old in JOBS.values():
@@ -123,7 +123,7 @@ def generate():
         job = {
             "id": key,
             "status": "working",
-            "message": "开始生成…",
+            "message": "Starting generation...",
             "folder": folder,
             "events": [],
         }
@@ -178,20 +178,20 @@ def comsol(key):
     data = request.get_json() or {}
     solve = data.get("solve", False)
     if type(solve) is not bool:
-        return jsonify(error="solve 必须为布尔值"), 400
+        return jsonify(error="solve must be a boolean."), 400
     if "report" not in job:
-        return jsonify(error="请先生成模型。"), 400
+        return jsonify(error="Generate a model first."), 400
     if (
         solve
         and job["report"]["config"].get("domain_mode") != "solid_fluid"
         and job["report"]["volume_components"] != 1
     ):
-        return jsonify(error="静力学演示要求单连通材料，请调整相位、密度或胞元。"), 400
+        return jsonify(error="The static elasticity demo requires connected material. Adjust phases, density, or cell counts."), 400
     if not detect_comsol():
-        return jsonify(error="未找到 COMSOL，请配置 COMSOL_BIN。"), 400
+        return jsonify(error="COMSOL was not found. Configure COMSOL_BIN."), 400
     with LOCK:
         if BUSY:
-            return jsonify(error="已有任务在运行。"), 409
+            return jsonify(error="A job is already running."), 409
         BUSY = True
         job.update(status="working")
         job.pop("operation_error", None)
@@ -283,8 +283,8 @@ def restore_latest():
                 "model": model,
                 "report": report,
                 "status": "ready",
-                "message": "已恢复最近生成的模型。",
-                "events": ["已恢复本机最近一次生成结果。"],
+                "message": "The most recently generated model was restored.",
+                "events": ["The latest local generation result was restored."],
             }
             return
         except Exception:

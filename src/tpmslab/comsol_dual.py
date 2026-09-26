@@ -117,7 +117,7 @@ def export_dual_java(folder, report, solve=False):
         if d["phase"] == "fluid"
     ):
         raise ValueError(
-            "流动演示要求每个流体域都连通 Z- 和 Z+；请创建未求解 MPH 后按各流道设置边界。"
+            "The flow demo requires every fluid domain to connect Z- and Z+. Create an unsolved MPH model and configure boundaries for each channel."
         )
     selections, checks = [], []
     for d in report["domain_map"]:

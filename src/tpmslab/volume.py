@@ -27,7 +27,7 @@ def generate_volume(config, progress=lambda text: None, *, _fluid_side=None):
 
         return generate_solid_fluid(config, progress)
     start = time.monotonic()
-    progress("采样曲面函数与密度场…")
+    progress("Sampling the surface function and density field...")
     n = np.array(config.cells) * config.resolution
     shape = n + 1
     spacing = np.array(config.size) / n
@@ -76,7 +76,7 @@ def generate_volume(config, progress=lambda text: None, *, _fluid_side=None):
     owners = np.flatnonzero(full).tolist()
     improved_cells = 0
     local_quality_gain = []
-    progress(f"直接裁切 {len(active):,} 个边界四面体…")
+    progress(f"Directly clipping {len(active):,} boundary tetrahedra...")
     for iteration, bi in enumerate(active):
         tet = background[bi]
         verts = []
@@ -140,11 +140,11 @@ def generate_volume(config, progress=lambda text: None, *, _fluid_side=None):
         cells.extend(fan)
         owners.extend([int(bi)] * len(fan))
         if iteration and iteration % 10000 == 0:
-            progress(f"边界裁切：{iteration:,} / {len(active):,}")
+            progress(f"Boundary clipping: {iteration:,} / {len(active):,}")
     if not cells:
         if _fluid_side is not None:
             return None
-        raise ValueError("没有生成体单元，请调整公式、密度或分辨率。")
+        raise ValueError("No volume elements were generated. Adjust the expression, density, or resolution.")
     points = np.array(nodes)
     tetra = np.array(cells, dtype=np.int32)
     owners = np.array(owners)
@@ -163,21 +163,21 @@ def generate_volume(config, progress=lambda text: None, *, _fluid_side=None):
     points = points[used]
     tetra = remap[tetra]
     volumes = np.abs(signed)
-    progress("检查体单元、共享面与材料连通性…")
+    progress("Checking volume elements, shared faces, and material connectivity...")
     allfaces = tetra[:, TET_FACES].reshape(-1, 3)
     _, first, counts = np.unique(
         np.sort(allfaces, axis=1), axis=0, return_index=True, return_counts=True
     )
     if counts.max() > 2:
-        raise ValueError("检测到非流形体网格，拒绝导出。")
+        raise ValueError("A non-manifold volume mesh was detected. Export was rejected.")
     boundary = allfaces[first[counts == 1]]
     surface = trimesh.Trimesh(points.copy(), boundary.copy(), process=False)
     surface.remove_unreferenced_vertices()
     ec = np.bincount(surface.edges_unique_inverse)
     if not surface.is_watertight or not surface.is_winding_consistent or np.any(ec != 2):
-        raise ValueError("边界闭合检查失败，请提高分辨率或调整参数；没有输出可分析实体。")
+        raise ValueError("The boundary closure check failed. Increase the resolution or adjust parameters; no analysis-ready volume was exported.")
     if abs(surface.volume - volumes.sum()) > max(volumes.sum() * 1e-8, 1e-10):
-        raise ValueError("体网格与边界体积不一致，拒绝导出。")
+        raise ValueError("Volume-mesh and boundary volumes do not match. Export was rejected.")
     adjacency = np.concatenate([tetra[:, [0, j]] for j in (1, 2, 3)])
     graph = coo_matrix(
         (np.ones(len(adjacency)), (adjacency[:, 0], adjacency[:, 1])),
@@ -206,18 +206,18 @@ def generate_volume(config, progress=lambda text: None, *, _fluid_side=None):
             }
         )
     warnings = [
-        "直接裁切四面体定义实体计算域；不是可编辑的光滑 STEP/NURBS 几何。",
-        "曲面与梯度在背景四面体内作线性近似。须提高采样数检查几何及仿真收敛性。",
-        "局部密度由周期单胞校准；有限外形及快速梯度可能使实际体积分数偏离目标。",
+        "Directly clipped tetrahedra define the computational volume; this is not editable smooth STEP/NURBS geometry.",
+        "The surface and gradient are linearly approximated within background tetrahedra. Increase the resolution to check geometry and simulation response stability.",
+        "Local density is calibrated using periodic cells. Finite boundaries and rapid grading may cause the measured volume fraction to differ from the target.",
     ]
     if config.mode == "sheet":
-        warnings.append("片状结构按双等值面定义，不等于恒定物理壁厚。")
+        warnings.append("Sheet structures are defined by two isosurfaces and do not imply constant physical wall thickness.")
     if components > 1:
         warnings.append(
-            f"有 {components} 个独立材料域，需分别施加约束；静力学演示仅支持单连通材料。"
+            f"There are {components} disconnected material domains requiring separate constraints; the static elasticity demo supports only connected material."
         )
     if quality.min() < 0.01:
-        warnings.append("存在低质量裁切单元，请检查质量分布；演示求解不代表网格已收敛。")
+        warnings.append("Low-quality cut elements are present. Inspect the quality distribution; solving the demo does not establish mesh convergence.")
     report = {
         "config": config.to_dict(),
         "units": "mm",
@@ -264,9 +264,9 @@ def generate_volume(config, progress=lambda text: None, *, _fluid_side=None):
         ).hexdigest(),
         "boundary_sha256": boundary_digest(points, boundary),
         "schema_version": 1,
-        "generator_version": "0.3.0rc1",
+        "generator_version": "0.3.1",
     }
-    progress("实体体网格已通过拓扑检查。")
+    progress("The solid volume mesh passed the topology checks.")
     return {
         "vertex_keys": [keys[i] for i in used],
         "points": points,

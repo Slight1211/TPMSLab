@@ -1,3 +1,8 @@
+# 0.3.1
+
+- Use English for Python progress callbacks, exceptions, API messages and exported warnings.
+- Update generator metadata; preserve numerical algorithms and historical validation records.
+
 # Changelog
 
 ## 0.3.0

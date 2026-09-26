@@ -121,15 +121,15 @@ def export_java(folder, report, solve=False, material=None):
         type(material.get(k)) not in (int, float) or not np.isfinite(material[k])
         for k in ("E", "nu", "rho")
     ):
-        raise ValueError("材料参数必须是有限数。")
+        raise ValueError("Material parameters must be finite numbers.")
     if not (
         1e3 <= material["E"] <= 1e13 and 0 <= material["nu"] < 0.49 and 0 < material["rho"] <= 1e6
     ):
-        raise ValueError("材料参数超出支持范围。")
+        raise ValueError("Material parameters are outside the supported range.")
     size = report["config"]["size"]
     connected = report["volume_components"] == 1
     if solve and not connected:
-        raise ValueError("静力学演示要求材料连通；当前存在多个独立实体，请先调整结构。")
+        raise ValueError("The static elasticity demo requires connected material. Adjust the structure to remove disconnected solids.")
     text = TEMPLATE.replace("@@BOUNDARIES@@", BOUNDARIES if connected else "")
     values = {
         "ROOT": json.dumps(folder.as_posix() + "/", ensure_ascii=True),
@@ -179,10 +179,10 @@ def build_mph(
     folder = Path(folder).resolve()
     exe = detect_comsol()
     if not exe:
-        raise RuntimeError("未找到 COMSOL。已提供 NAS；请设置 COMSOL_BIN 后再创建 MPH。")
+        raise RuntimeError("COMSOL was not found. The NAS file is available; set COMSOL_BIN before creating an MPH model.")
     if solve and report["tetrahedra"] > max_solve_tetrahedra:
         raise ValueError(
-            f"演示求解上限为 {max_solve_tetrahedra:,} 个体单元；请降低采样数或明确设置研究用上限。"
+            f"The demo solver limit is {max_solve_tetrahedra:,} volume elements. Reduce the resolution or explicitly set a research-specific limit."
         )
     java = export_java(folder, report, solve, material)
     flags = subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0
@@ -203,9 +203,9 @@ def build_mph(
         ),
     ]:
         progress(
-            "编译 COMSOL 接口…"
+            "Compiling the COMSOL interface..."
             if name == "compile"
-            else ("COMSOL 导入并执行演示求解…" if solve else "COMSOL 创建并重开实体模型…")
+            else ("Importing the mesh into COMSOL and solving the demo..." if solve else "Creating and reopening the COMSOL mesh-defined model...")
         )
         with (folder / (name + ".log")).open("w", encoding="utf8") as log:
             process = subprocess.Popen(
@@ -224,21 +224,21 @@ def build_mph(
                 else:
                     process.kill()
                 raise RuntimeError(
-                    "COMSOL 运行超时。日志已保留；请降低分辨率或明确设置更长的 build_timeout_s 后重试。"
+                    "COMSOL timed out. Logs were retained; reduce the resolution or explicitly increase build_timeout_s and retry."
                 )
         if code:
-            raise RuntimeError(f"COMSOL {name} 失败，请查看 {name}.log 与 comsol.log。")
+            raise RuntimeError(f"COMSOL {name} failed. See {name}.log and comsol.log.")
     evidence = folder / "comsol_verification.json"
     log_text = (folder / "build.log").read_text(encoding="utf8", errors="replace")
     found = re.findall(r"TPMS_REOPEN_VERIFIED (\{[^\r\n]+\})", log_text)
     if not found:
         raise RuntimeError(
-            "COMSOL 未完成重开验证，请查看 build.log（可能是许可、导入或求解错误）。"
+            "COMSOL did not complete reopening verification. See build.log for possible licence, import, or solver errors."
         )
     result = json.loads(found[-1])
     evidence.write_text(json.dumps(result, indent=2), encoding="utf8")
     if result.get("solved") != solve:
-        raise RuntimeError("求解验证记录与本次请求不一致。")
+        raise RuntimeError("The solution verification record does not match this request.")
     report.update(comsol_verified=True, comsol_solved=bool(result["solved"]), comsol=result)
     (folder / "report.json").write_text(
         json.dumps(report, ensure_ascii=False, indent=2), encoding="utf8"
@@ -246,5 +246,5 @@ def build_mph(
     from .io import refresh_manifest
 
     refresh_manifest(folder)
-    progress("COMSOL 模型已重新打开并验证。")
+    progress("The COMSOL model was reopened and verified.")
     return result

@@ -4,7 +4,7 @@ from .model import Config
 from .volume import generate_volume, write_nastran
 from .io import save_model
 
-__version__ = "0.3.0"
+__version__ = "0.3.1"
 __all__ = ["Config", "generate", "generate_volume", "write_nastran", "save_model", "list_families"]
 
 

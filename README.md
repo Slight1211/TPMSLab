@@ -3,7 +3,8 @@
 [English quick start](docs/QUICKSTART_EN.md) | [中文使用说明](docs/QUICKSTART_ZH.md)
 
 An installable Python toolkit for graded TPMS-derived **solid and complementary pore-fluid volume meshes**.
-Version 0.3.0. This repository is public. Source, tests, examples and versioned
+The current source revision is 0.3.1 (English runtime messages). The published
+PyPI baseline is 0.3.0. This repository is public. Source, tests, examples and versioned
 reproducibility records are distributed together. Use an exact commit or the
 `v0.3.0` tag, rather than a changing `main`, for reproducible work.
 
@@ -12,7 +13,9 @@ reproducibility records are distributed together. Use an exact commit or the
 
 A public source repository, a GitHub Release, a Zenodo archive and a PyPI upload
 are separate records. Cite a DOI only after the archive is actually published.
-No PyPI release has been made.
+Version 0.3.0 is available on [PyPI](https://pypi.org/project/tpmslab/0.3.0/).
+Version 0.3.1 is a source/local-wheel patch until a separate release is published.
+See [patch notes](docs/RELEASE_NOTES_v0.3.1.md).
 
 ## Install
 

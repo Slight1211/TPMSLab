@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "Please cite the exact software version used."
 type: software
 title: "TPMS Lab"
-version: "0.3.0"
+version: "0.3.1"
 authors:
   - family-names: Chen
     given-names: Xin

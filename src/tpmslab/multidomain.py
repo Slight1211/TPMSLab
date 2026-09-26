@@ -13,7 +13,7 @@ from .volume import generate_volume, TET_FACES, EDGES, boundary_digest
 def generate_solid_fluid(config, progress):
     start = time.monotonic()
     single = replace(config, domain_mode="solid")
-    progress("生成固体域及互补孔隙流体域…")
+    progress("Generating solid domains and complementary pore-fluid domains...")
     parts = [generate_volume(single, progress)]
     for side in range(2 if config.mode == "sheet" else 1):
         part = generate_volume(single, progress, _fluid_side=side)
@@ -168,17 +168,17 @@ def generate_solid_fluid(config, progress):
         ).hexdigest(),
         boundary_sha256=boundary_digest(points, boundary),
         schema_version=2,
-        generator_version="0.3.0rc1",
+        generator_version="0.3.1",
         elapsed_seconds=round(time.monotonic() - start, 3),
     )
-    report["warnings"] = [w for w in report["warnings"] if "静力学演示" not in w]
+    report["warnings"] = [w for w in report["warnings"] if "static elasticity demo" not in w]
     report["warnings"] += [
-        "固体与流体仅填充同一长方体外形内部；不包含外部流场或入口缓冲段。",
-        "固液界面为共享节点的共形网格；流体边界层和流动网格收敛尚需按工况检查。",
-        "流体可能含多个独立流道或封闭孔隙，应按连通域选择进出口。",
+        "Solid and fluid fill the same rectangular box only; external flow regions and inlet buffers are not included.",
+        "The solid-fluid interface is conforming with shared nodes. Check fluid boundary layers and flow mesh convergence for the intended conditions.",
+        "The fluid may contain disconnected channels or closed pores. Select inlets and outlets by connected domain.",
     ]
     progress(
-        f"双域分区通过：{report['solid_components']} 个固体域，{report['fluid_components']} 个流体域，共享 {len(interface):,} 个界面三角形。"
+        f"Two-phase partition verified: {report['solid_components']} solid domains, {report['fluid_components']} fluid domains, and {len(interface):,} shared interface triangles."
     )
     return dict(
         points=points,
