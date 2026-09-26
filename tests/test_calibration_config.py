@@ -14,8 +14,10 @@ def test_calibration_samples_and_default_compatibility(mode):
     expression = Config().expression
     a = (np.arange(56) + 0.5) * (2*np.pi/56)
     values = evaluate(expression, a[:,None,None], a[None,:,None], a[None,None,:])
-    if mode == "sheet": values = abs(values)
-    elif mode == "solid_above": values = -values
+    if mode == "sheet":
+        values = abs(values)
+    elif mode == "solid_above":
+        values = -values
     p, samples = calibration(expression, mode)
     np.testing.assert_array_equal(samples, np.sort(values.ravel()))
     np.testing.assert_array_equal(p, np.linspace(0,1,56**3))
@@ -41,3 +43,4 @@ def test_legacy_config_and_unbounded_parameter():
     assert Config.from_dict({}).m_cal == 56
     cfg = Config.from_dict({"m_cal": 1024})
     assert Config.from_dict(json.loads(json.dumps(cfg.to_dict()))) == cfg
+
