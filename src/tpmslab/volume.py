@@ -44,7 +44,7 @@ def generate_volume(config, progress=lambda text: None, *, _fluid_side=None):
         ),
     )
     f = np.broadcast_to(f, tuple(shape)).ravel()
-    probability, samples = calibration(config.expression, config.mode)
+    probability, samples = calibration(config.expression, config.mode, config.m_cal)
     rho = np.broadcast_to(
         target_density(config, grid[..., 0], grid[..., 1], grid[..., 2]), tuple(shape)
     ).ravel()

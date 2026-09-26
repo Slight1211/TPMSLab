@@ -1,3 +1,11 @@
+# 0.3.4
+
+- Add configurable density-calibration sampling via `m_cal` (default 56).
+
+- Remove fixed upper limits on per-cell resolution and per-axis cell counts.
+- Use an uncapped integer input in the browser interface.
+- Preserve lower bounds, integer validation and numerical algorithms.
+
 # 0.3.3
 
 - Set the per-cell resolution maximum to 48 in Python and the browser slider.

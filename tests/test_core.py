@@ -48,9 +48,11 @@ def test_custom_expressions_reject_unsafe_or_nonfinite(expression):
     [
         {"size": [0, 5, 5]},
         {"cells": [1, 1, 1.5]},
-        {"resolution": 128},
-        {"resolution": 49},
-        {"resolution": 64},
+        {"resolution": 7},
+        {"resolution": 8.5},
+        {"resolution": True},
+        {"cells": [0, 1, 1]},
+        {"cells": [True, 1, 1]},
         {"density_start": float("nan")},
         {"family": "unknown"},
         {"gradient": "periodic", "density_start": 0.1},
@@ -118,15 +120,32 @@ def test_http_rejects_cross_site_and_invalid_parameters():
     assert "error" in response.json
 
 
-@pytest.mark.parametrize("cells,resolution", [([1, 1, 1], 48), ([2, 2, 2], 32), ([6, 6, 6], 48)])
+@pytest.mark.parametrize("cells,resolution", [([1, 1, 1], 48), ([2, 2, 2], 32), ([6, 6, 6], 48), ([8, 9, 10], 64), ([100, 100, 100], 128)])
 def test_large_grid_config_is_not_rejected(cells, resolution):
     config = Config.from_dict({**Config().to_dict(), "cells": cells, "resolution": resolution})
     assert config.resolution == resolution
     assert tuple(config.cells) == tuple(cells)
 
 
-def test_resolution_slider_matches_configuration_limit():
+def test_mesh_inputs_have_no_fixed_upper_limit():
     from pathlib import Path
+    from html.parser import HTMLParser
     import tpmslab
-    page = (Path(tpmslab.__file__).parent / "static" / "index.html").read_text(encoding="utf8")
-    assert 'id="resolution" type="range" min="8" max="48"' in page
+
+    class Inputs(HTMLParser):
+        def __init__(self):
+            super().__init__()
+            self.inputs = {}
+
+        def handle_starttag(self, tag, attrs):
+            attrs = dict(attrs)
+            if tag == "input" and attrs.get("id") in {"resolution", "nx", "ny", "nz"}:
+                self.inputs[attrs["id"]] = attrs
+
+    parser = Inputs()
+    parser.feed((Path(tpmslab.__file__).parent / "static" / "index.html").read_text(encoding="utf8"))
+    assert len(parser.inputs) == 4
+    for attrs in parser.inputs.values():
+        assert attrs["type"] == "number"
+        assert attrs["step"] == "1"
+        assert "max" not in attrs

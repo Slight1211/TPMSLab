@@ -1,10 +1,10 @@
 # TPMS Lab: English quick start
 
-TPMS Lab is a Python package for graded TPMS-derived solid and complementary pore-fluid volume meshes. Version 0.3.0rc1 is a release candidate, not a published PyPI release.
+TPMS Lab is a Python package for graded TPMS-derived solid and complementary pore-fluid volume meshes. The current source version is 0.3.4; the published PyPI baseline is 0.3.0.
 
 ## 1. Install
 
-Use Python 3.11 or later. Clone the repository using a GitHub account with access if the repository is private:
+Use Python 3.11 or later. Clone the public repository:
 
 ```sh
 git clone https://github.com/Slight1211/TPMSLab.git
@@ -95,4 +95,10 @@ Open the local URL printed by the command. Mesh generation remains local.
 The included checks establish mesh partitioning, matching interfaces, domain-aware exports and the demonstrated COMSOL workflows. They do not establish mesh-converged permeability or stress, universal element quality, geometry-level Boolean operations, or deformation-coupled fluid-structure interaction. Increasing resolution increases memory and computational cost. See `docs/SOLID_FLUID.md`, `docs/VALIDATION.md` and `docs/METHOD.md` for validation records, methods and limitations.
 
 
-Supported resolution: `8 <= resolution <= 48` subdivisions per cell edge.
+Supported resolution: `resolution >= 8` subdivisions per cell edge.
+
+Resolution and each axis cell count have no fixed upper limit. Cell counts must be positive integers; resolution must be an integer of at least 8. Feasible sizes depend on available resources.
+
+### Density calibration sampling
+
+`Config(m_cal=80)` sets the number of midpoint samples per axis used to calibrate density to threshold (80 cubed samples). The default is 56; values must be integers of at least 8, with no fixed upper bound. This parameter is independent of mesh `resolution`. JSON configurations use the same `m_cal` key; older configurations default to 56. Exported configuration records include the selected value. Increasing it changes density calibration and can change the generated geometry. Historical validation used 56.

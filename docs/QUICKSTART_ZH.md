@@ -1,6 +1,6 @@
 # Python 调用：梯度 TPMS 固体 / 流体双域
 
-需要 Python 3.11 或以上。软件当前为 0.3.0rc1，尚未发布到 PyPI；在本仓库根目录安装：
+需要 Python 3.11 或以上。当前源码版本为 0.3.4，PyPI 已发布基线为 0.3.0；在本仓库根目录安装：
 
 ```sh
 python -m pip install .
@@ -53,4 +53,10 @@ tpmslab web --output tpmslab-output
 可修改 family 为 Primitive_Schwartz、Diamond 等；可用 `tpmslab families` 查看内置名称。提高 resolution 会增加体单元和计算成本。COMSOL 验证范围和复现方法见 docs/SOLID_FLUID.md；算法说明见 docs/METHOD.md。
 
 
-支持的分辨率范围：每个胞元边长方向 `8 <= resolution <= 48`。
+支持的分辨率范围：每个胞元边长方向 `resolution >= 8`。
+
+分辨率及各轴胞元数不设固定上限；分辨率为至少 8 的整数，各轴胞元数为正整数。实际可处理规模取决于计算资源。
+
+### 密度标定采样
+
+`Config(m_cal=80)` 设置每轴密度标定中点采样数，总数为 80³。默认 56，要求整数且至少为 8，不设固定上限；与网格 `resolution` 独立。JSON 同样使用 `m_cal` 字段，旧配置省略时使用 56。导出配置记录该值。改变它可能改变标定阈值及生成几何；既有验证使用 56。

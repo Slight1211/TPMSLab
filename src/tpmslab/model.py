@@ -120,6 +120,8 @@ class Config:
     phase_degrees: tuple = (0.0, 0.0, 90.0)
     custom: str = "sin(X)*cos(Y)+sin(Y)*cos(Z)+sin(Z)*cos(X)"
 
+    m_cal: int = 56
+
     def __post_init__(self):
         for name in ("size", "cells", "periodic_amplitudes", "phase_degrees"):
             value = getattr(self, name)
@@ -167,10 +169,12 @@ class Config:
             for v in self.size
         ):
             raise ValueError("All three outer dimensions must be between 0.1 and 1000 mm.")
-        if len(self.cells) != 3 or any(type(v) is not int or not 1 <= v <= 6 for v in self.cells):
-            raise ValueError("Cell counts must be integers from 1 to 6.")
-        if type(self.resolution) is not int or not 8 <= self.resolution <= 48:
-            raise ValueError("Resolution per cell must be an integer from 8 to 48.")
+        if len(self.cells) != 3 or any(type(v) is not int or v < 1 for v in self.cells):
+            raise ValueError("Cell counts must be positive integers.")
+        if type(self.resolution) is not int or self.resolution < 8:
+            raise ValueError("Resolution per cell must be an integer of at least 8.")
+        if type(self.m_cal) is not int or self.m_cal < 8:
+            raise ValueError("m_cal must be an integer of at least 8.")
         for v in (self.density_start, self.density_end):
             if type(v) not in (int, float) or not np.isfinite(v) or not 0.08 <= v <= 0.85:
                 raise ValueError("Relative density must be between 0.08 and 0.85.")
@@ -200,11 +204,13 @@ class Config:
 
 
 @lru_cache(maxsize=64)
-def calibration(expression, mode):
+def calibration(expression, mode, m_cal=56):
+    if type(m_cal) is not int or m_cal < 8:
+        raise ValueError("m_cal must be an integer of at least 8.")
     # Midpoints avoid bias from duplicated periodic endpoints.
-    a = (np.arange(56) + 0.5) * (2 * np.pi / 56)
+    a = (np.arange(m_cal) + 0.5) * (2 * np.pi / m_cal)
     values = evaluate(expression, a[:, None, None], a[None, :, None], a[None, None, :])
-    values = np.broadcast_to(values, (56, 56, 56))
+    values = np.broadcast_to(values, (m_cal, m_cal, m_cal))
     if mode == "sheet":
         values = np.abs(values)
     elif mode == "solid_above":
@@ -247,7 +253,7 @@ def raw_field(config, X, Y, Z):
         for p, n, L, phase in zip((X, Y, Z), config.cells, config.size, config.phase_degrees)
     ]
     f = evaluate(config.expression, *angles)
-    probabilities, values = calibration(config.expression, config.mode)
+    probabilities, values = calibration(config.expression, config.mode, config.m_cal)
     q = np.interp(target_density(config, X, Y, Z), probabilities, values)
     if config.mode == "sheet":
         f = np.abs(f)

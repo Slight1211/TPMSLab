@@ -3,7 +3,7 @@
 [English quick start](docs/QUICKSTART_EN.md) | [中文使用说明](docs/QUICKSTART_ZH.md)
 
 An installable Python toolkit for graded TPMS-derived **solid and complementary pore-fluid volume meshes**.
-The current source revision is 0.3.3 (resolution capped at 48). The published
+The current source revision is 0.3.4 (no fixed resolution or cell-count upper limits). The published
 PyPI baseline is 0.3.0. This repository is public. Source, tests, examples and versioned
 reproducibility records are distributed together. Use an exact commit or the
 `v0.3.0` tag, rather than a changing `main`, for reproducible work.
@@ -14,8 +14,8 @@ reproducibility records are distributed together. Use an exact commit or the
 A public source repository, a GitHub Release, a Zenodo archive and a PyPI upload
 are separate records. Cite a DOI only after the archive is actually published.
 Version 0.3.0 is available on [PyPI](https://pypi.org/project/tpmslab/0.3.0/).
-Version 0.3.3 is a source/local-wheel patch until a separate release is published.
-See [patch notes](docs/RELEASE_NOTES_v0.3.3.md).
+Version 0.3.4 is a source/local-wheel patch until a separate release is published.
+See [patch notes](docs/RELEASE_NOTES_v0.3.4.md).
 
 ## Install
 
@@ -91,8 +91,8 @@ density profiles, sheet and two network modes, phase controls, and a restricted
 custom-formula parser. Built-in formulas are adapted from LattGen; see
 `THIRD_PARTY_NOTICES.md`. They are not claimed as new TPMS families or exact
 minimal surfaces. Density targets are periodic-cell calibrations, not guaranteed
-finite-specimen volume fractions. Current bounds: box domains, 1–6 cells per
-axis and 8–48 samples per cell. There is no fixed background-voxel count cap; feasible grid sizes depend on available memory. The built-in
+finite-specimen volume fractions. Current bounds: box domains, positive integer cell counts per
+axis and at least 8 samples per cell, with no fixed upper limits. There is no fixed background-voxel count cap; feasible grid sizes depend on available memory. The built-in
 static demo is limited to 180,000 tetrahedra and connected material. Top/bottom
 contact, constraints and convergence must be checked for a research model.
 
@@ -189,3 +189,7 @@ See [validation/README.md](validation/README.md) for the numerical records,
 configuration provenance and reproduction commands corresponding to the verified
 workflow. The package provides mesh-defined simulation domains, not smooth CAD
 reconstruction or coupled FSI.
+
+### Density calibration sampling
+
+`Config(m_cal=80)` sets the number of midpoint samples per axis used to calibrate density to threshold (80 cubed samples). The default is 56; values must be integers of at least 8, with no fixed upper bound. This parameter is independent of mesh `resolution`. JSON configurations use the same `m_cal` key; older configurations default to 56. Exported configuration records include the selected value. Increasing it changes density calibration and can change the generated geometry. Historical validation used 56.
