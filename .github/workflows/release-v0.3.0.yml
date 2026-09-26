@@ -15,6 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: 5d1829278a5b98d69fd57ecbe639e7bcb95ca577
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -35,7 +37,7 @@ jobs:
           python -m pip freeze > "$GITHUB_WORKSPACE/dist/build-environment.txt"
       - name: Assemble versioned evidence and checksums
         env:
-          SOURCE_COMMIT: ${{ github.sha }}
+          SOURCE_COMMIT: 5d1829278a5b98d69fd57ecbe639e7bcb95ca577
         run: |
           python - <<'PY'
           import hashlib, json, os, pathlib, zipfile
@@ -66,7 +68,7 @@ jobs:
       - name: Create exact-commit draft release
         env:
           GH_TOKEN: ${{ github.token }}
-          SOURCE_COMMIT: ${{ github.sha }}
+          SOURCE_COMMIT: 5d1829278a5b98d69fd57ecbe639e7bcb95ca577
         run: |
           if gh api repos/$GITHUB_REPOSITORY/git/ref/tags/v0.3.0 >/dev/null 2>&1; then
             echo 'v0.3.0 already exists; refusing to move or overwrite it.'
@@ -79,3 +81,4 @@ jobs:
           cp docs/RELEASE_NOTES_v0.3.0.md "$RUNNER_TEMP/release-notes.md"
           printf '\nExact source commit: `%s`.\n' "$SOURCE_COMMIT" >> "$RUNNER_TEMP/release-notes.md"
           gh release create v0.3.0 --target "$SOURCE_COMMIT" --title 'TPMS Lab v0.3.0' --notes-file "$RUNNER_TEMP/release-notes.md" --draft dist/*
+
