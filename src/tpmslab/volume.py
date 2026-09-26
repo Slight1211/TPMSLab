@@ -21,6 +21,7 @@ TET_FACES = [(0, 2, 1), (0, 1, 3), (0, 3, 2), (1, 2, 3)]
 
 
 def generate_volume(config, progress=lambda text: None, *, _fluid_side=None):
+    from . import __version__
     config.validate()
     if config.domain_mode == "solid_fluid" and _fluid_side is None:
         from .multidomain import generate_solid_fluid
@@ -264,7 +265,7 @@ def generate_volume(config, progress=lambda text: None, *, _fluid_side=None):
         ).hexdigest(),
         "boundary_sha256": boundary_digest(points, boundary),
         "schema_version": 1,
-        "generator_version": "0.3.1",
+        "generator_version": __version__,
     }
     progress("The solid volume mesh passed the topology checks.")
     return {

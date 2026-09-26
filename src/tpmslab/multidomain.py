@@ -11,6 +11,7 @@ from .volume import generate_volume, TET_FACES, EDGES, boundary_digest
 
 
 def generate_solid_fluid(config, progress):
+    from . import __version__
     start = time.monotonic()
     single = replace(config, domain_mode="solid")
     progress("Generating solid domains and complementary pore-fluid domains...")
@@ -168,7 +169,7 @@ def generate_solid_fluid(config, progress):
         ).hexdigest(),
         boundary_sha256=boundary_digest(points, boundary),
         schema_version=2,
-        generator_version="0.3.1",
+        generator_version=__version__,
         elapsed_seconds=round(time.monotonic() - start, 3),
     )
     report["warnings"] = [w for w in report["warnings"] if "static elasticity demo" not in w]

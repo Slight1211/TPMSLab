@@ -49,7 +49,8 @@ def test_custom_expressions_reject_unsafe_or_nonfinite(expression):
         {"size": [0, 5, 5]},
         {"cells": [1, 1, 1.5]},
         {"resolution": 128},
-        {"cells": [6, 6, 6], "resolution": 64},
+        {"resolution": 49},
+        {"resolution": 64},
         {"density_start": float("nan")},
         {"family": "unknown"},
         {"gradient": "periodic", "density_start": 0.1},
@@ -115,3 +116,17 @@ def test_http_rejects_cross_site_and_invalid_parameters():
     )
     assert response.status_code == 400
     assert "error" in response.json
+
+
+@pytest.mark.parametrize("cells,resolution", [([1, 1, 1], 48), ([2, 2, 2], 32), ([6, 6, 6], 48)])
+def test_large_grid_config_is_not_rejected(cells, resolution):
+    config = Config.from_dict({**Config().to_dict(), "cells": cells, "resolution": resolution})
+    assert config.resolution == resolution
+    assert tuple(config.cells) == tuple(cells)
+
+
+def test_resolution_slider_matches_configuration_limit():
+    from pathlib import Path
+    import tpmslab
+    page = (Path(tpmslab.__file__).parent / "static" / "index.html").read_text(encoding="utf8")
+    assert 'id="resolution" type="range" min="8" max="48"' in page

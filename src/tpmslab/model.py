@@ -169,10 +169,8 @@ class Config:
             raise ValueError("All three outer dimensions must be between 0.1 and 1000 mm.")
         if len(self.cells) != 3 or any(type(v) is not int or not 1 <= v <= 6 for v in self.cells):
             raise ValueError("Cell counts must be integers from 1 to 6.")
-        if type(self.resolution) is not int or not 8 <= self.resolution <= 64:
-            raise ValueError("Resolution per cell must be an integer from 8 to 64.")
-        if np.prod(np.array(self.cells) * self.resolution) > 200_000:
-            raise ValueError("The background grid exceeds 200,000 cubes. Reduce the cell counts or resolution.")
+        if type(self.resolution) is not int or not 8 <= self.resolution <= 48:
+            raise ValueError("Resolution per cell must be an integer from 8 to 48.")
         for v in (self.density_start, self.density_end):
             if type(v) not in (int, float) or not np.isfinite(v) or not 0.08 <= v <= 0.85:
                 raise ValueError("Relative density must be between 0.08 and 0.85.")

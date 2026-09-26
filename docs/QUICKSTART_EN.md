@@ -93,3 +93,6 @@ Open the local URL printed by the command. Mesh generation remains local.
 ## 7. Scope and validation
 
 The included checks establish mesh partitioning, matching interfaces, domain-aware exports and the demonstrated COMSOL workflows. They do not establish mesh-converged permeability or stress, universal element quality, geometry-level Boolean operations, or deformation-coupled fluid-structure interaction. Increasing resolution increases memory and computational cost. See `docs/SOLID_FLUID.md`, `docs/VALIDATION.md` and `docs/METHOD.md` for validation records, methods and limitations.
+
+
+Supported resolution: `8 <= resolution <= 48` subdivisions per cell edge.

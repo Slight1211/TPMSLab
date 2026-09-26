@@ -51,3 +51,6 @@ tpmslab web --output tpmslab-output
 ```
 
 可修改 family 为 Primitive_Schwartz、Diamond 等；可用 `tpmslab families` 查看内置名称。提高 resolution 会增加体单元和计算成本。COMSOL 验证范围和复现方法见 docs/SOLID_FLUID.md；算法说明见 docs/METHOD.md。
+
+
+支持的分辨率范围：每个胞元边长方向 `8 <= resolution <= 48`。

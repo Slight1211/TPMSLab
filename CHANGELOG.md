@@ -1,3 +1,16 @@
+# 0.3.3
+
+- Set the per-cell resolution maximum to 48 in Python and the browser slider.
+- Retain removal of the total background-grid cap.
+- Synchronize documentation and add boundary regression checks.
+- Report the running generator version instead of a stale literal; geometry is unchanged.
+
+# 0.3.2
+
+- Remove the fixed 200,000-background-voxel limit from configuration validation.
+- Retain per-axis cell-count and per-cell resolution validation.
+- Add configuration regression coverage for grids above the former limit.
+
 # 0.3.1
 
 - Use English for Python progress callbacks, exceptions, API messages and exported warnings.
