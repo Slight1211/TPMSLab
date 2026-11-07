@@ -1,12 +1,14 @@
-"""Read-only audits of saved COMSOL pore-flow solutions (COMSOL 6.3)."""
+"""Read-only audits of saved COMSOL pore-flow solutions.
+
+The launch uses the shared :func:`tpmslab.comsol.run_comsol_class` so that
+isolated preference files and short scratch paths apply here as well.
+"""
 
 import json
 import hashlib
-import os
 from pathlib import Path
-import re
-import subprocess
-from .comsol import detect_comsol
+from . import comsol as _comsol
+from .comsol import run_comsol_class, runtime_directory, stage_preferences
 
 JAVA = r"""import com.comsol.model.*;
 import com.comsol.model.util.*;
@@ -52,51 +54,43 @@ public class TPMSAudit {
 }"""
 
 
-def audit_saved_flow(model_path, interface_area_mm2, domain_map, output):
-    """Audit the stored solution without changing its MPH; write separate audit files."""
+def audit_saved_flow(model_path, interface_area_mm2, domain_map, output, *,
+                     preferences_directory=None, timeout_s=600, processes=2):
+    """Audit the stored solution without changing its MPH; write separate audit files.
+
+    ``compile.log``, ``build.log`` and ``comsol.log`` are written to ``output``
+    together with ``audit.json``.
+    """
     output = Path(output).resolve()
     output.mkdir(parents=True, exist_ok=False)
-    exe = detect_comsol()
+    exe = _comsol.detect_comsol()  # module attribute so tests can stub it
     if exe is None:
         raise RuntimeError("COMSOL installation not found")
     text = JAVA.replace("@@MODEL@@", json.dumps(Path(model_path).resolve().as_posix()))
     text = text.replace("@@AREA@@", repr(float(interface_area_mm2)))
-    text = text.replace(
-        "@@IDS@@", ",".join(str(d["id"]) for d in domain_map if d["phase"] == "fluid")
-    )
+    from .comsol_dual import spanning_fluid_domains
+
+    # Only channels that connect Z- and Z+ carry flow; closed pores and dead
+    # ends are excluded from the physics by export_dual_java as well.
+    spanning, _ = spanning_fluid_domains(domain_map)
+    if not spanning:
+        raise ValueError("No fluid domain connects Z- and Z+; nothing to audit")
+    text = text.replace("@@IDS@@", ",".join(map(str, spanning)))
     java = output / "TPMSAudit.java"
     java.write_text(text, encoding="ascii")
-    for name, cmd, timeout in [
-        ("compile", [str(exe / "comsolcompile.exe"), str(java)], 180),
-        (
-            "audit",
-            [
-                str(exe / "comsolbatch.exe"),
-                "-np",
-                "2",
-                "-inputfile",
-                str(java.with_suffix(".class")),
-                "-batchlog",
-                str(output / "comsol.log"),
-            ],
-            600,
-        ),
-    ]:
-        with (output / (name + ".log")).open("w", encoding="utf8") as log:
-            subprocess.run(
-                cmd,
-                cwd=output,
-                stdout=log,
-                stderr=subprocess.STDOUT,
-                timeout=timeout,
-                check=True,
-                creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
-            )
-    s = (output / "audit.log").read_text("utf8", errors="replace")
-    match = re.search(r"TPMS_AUDIT (\{[^\r\n]+\})", s)
-    if not match:
-        raise RuntimeError("COMSOL audit did not complete; inspect audit.log and comsol.log")
-    result = json.loads(match[1])
+    local_preferences = None
+    launch = {}
+    if preferences_directory is not None:
+        local_preferences, staged = stage_preferences(preferences_directory, output / "preferences")
+        launch["preferences_source"] = staged["source"]
+        launch["preferences_input_sha256"] = staged["sha256"]
+    with runtime_directory(output) as runtime:
+        result, info = run_comsol_class(
+            output, java, marker="TPMS_AUDIT", build_timeout_s=timeout_s,
+            messages=("Compiling the COMSOL audit...", "Auditing the saved COMSOL solution..."),
+            preferences_directory=local_preferences, runtime=runtime, processes=processes,
+        )
+    result.update(launch, comsol_bin=info["comsol_bin"], comsol_version=info["comsol_version"])
     result["interface_area_mesh_mm2"] = interface_area_mm2
     result["source_mph_sha256"] = hashlib.sha256(Path(model_path).read_bytes()).hexdigest()
     mapping = {d["id"]: d for d in domain_map}

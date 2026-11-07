@@ -26,6 +26,6 @@ The flux check confirms consistency of these runs, not mesh convergence or perme
 python benchmarks/verify_solid_fluid.py --out new_dual_results
 ```
 
-COMSOL and the relevant physics licence are required. The open tests do not require COMSOL. Export an unsolved MPH to assign custom physics and materials. The fluid phase is the pore volume within the same box; no outside fluid region or entrance/exit reservoir is included. Connected pores that do not reach both Z faces are retained in the mesh but cannot use the automatic flow demo.
+COMSOL and the relevant physics licence are required. The open tests do not require COMSOL. Export an unsolved MPH to assign custom physics and materials. The fluid phase is the pore volume within the same box; no outside fluid region or entrance/exit reservoir is included. Connected pores that do not reach both Z faces are retained in the mesh; since 0.3.9.dev2 the automatic flow demo excludes them from the `spf` physics (recorded as `excluded_fluid_domains`) instead of refusing the whole model.
 
 Selection PIDs are documented in README.md. COMSOL entity numbers can differ from mesh domain labels; the bridge explicitly resolves imported property selections rather than assuming matching numbers.

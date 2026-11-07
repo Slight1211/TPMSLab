@@ -1,6 +1,6 @@
 # TPMS Lab: English quick start
 
-TPMS Lab is a Python package for graded TPMS-derived solid and complementary pore-fluid volume meshes. The current source version is 0.3.4; the published PyPI baseline is 0.3.0.
+TPMS Lab is a Python package for graded TPMS-derived solid and complementary pore-fluid volume meshes. This local development source is 0.3.5.dev0; the fixed public PyPI baseline is 0.3.4. The optional COMSOL quality-remeshing mode is described in [QUALITY_REMESH.md](QUALITY_REMESH.md).
 
 ## 1. Install
 
@@ -44,9 +44,24 @@ print(folder / "mesh.nas")
 
 Coordinates and dimensions are in millimetres. Connectivity arrays use zero-based indices. `save_model` requires a new directory and will not overwrite an existing result. To inspect available families, run `tpmslab families` or call `tpmslab.list_families()`.
 
+The local 0.3.5.dev0 snapshot also supports `edge_interpolation="implicit_root"`
+in `Config` when `domain_mode="solid_fluid"`. This optional geometry correction
+projects shared cut vertices toward roots of the continuous implicit field
+while checking adjacent tetrahedra for inversion. The default `"linear"`
+reproduces the original generator. Inspect both density error and low-tail
+element quality before using a projected mesh for analysis; projection alone
+does not remove poor cut tetrahedra. See [QUALITY_REMESH.md](QUALITY_REMESH.md)
+for the separate COMSOL-dependent quality step.
+
+`edge_interpolation="quadratic_root"` is another experimental two-phase
+option. It approximates each continuous-field edge crossing with a batched
+quadratic fit and retains the same inversion checks. In the tested graded
+designs, it recovered nearly the iterative-root density accuracy with lower
+generation time. Neither root-based option changes the element count.
+
 ## 4. Create or solve a COMSOL model
 
-On Windows, install COMSOL and the licences needed for the requested physics. The verified environment is COMSOL 6.3.0.290. If detection fails, set `COMSOL_BIN` to the directory containing `comsolbatch.exe` and `comsolcompile.exe`.
+On Windows, install COMSOL and the licences needed for the requested physics. The verified environment is COMSOL 6.2.0.290; newer releases use the same bridge through reflection. If detection fails, set `COMSOL_BIN` to the directory containing `comsolbatch.exe` and `comsolcompile.exe`.
 
 ```python
 from tpmslab.comsol import build_mph

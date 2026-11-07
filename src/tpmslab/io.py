@@ -9,11 +9,13 @@ import numpy as np
 from .volume import write_nastran
 
 
-def save_model(model, directory):
+def save_model(model, directory, *, quadratic=False):
     """Write NAS, NPZ, STL preview, parameters, checks and hashes to a NEW folder.
 
     Existing directories are rejected. STL is a preview, not the solver mesh.
     """
+    if quadratic:
+        raise ValueError("10-node tetrahedron export was removed; save the four-node mesh instead")
     folder = Path(directory).resolve()
     if folder.exists():
         raise FileExistsError(f"Output already exists: {folder}")
@@ -56,17 +58,30 @@ def save_model(model, directory):
     for name in ("numpy", "scipy", "trimesh"):
         environment[name] = importlib.metadata.version(name)
     (folder / "environment.json").write_text(json.dumps(environment, indent=2), encoding="utf8")
+    inputs = {name: {"bytes": (folder / name).stat().st_size, "sha256": file_sha256(folder / name)}
+              for name in ("mesh.nas", "mesh.npz", "config.json", "domains.json")
+              if (folder / name).is_file()}
+    (folder / "input_manifest.json").write_text(json.dumps(inputs, indent=2), encoding="utf8")
     refresh_manifest(folder)
     return folder
 
 
+def file_sha256(path):
+    """Hash large NAS/NPZ/MPH files without reading the entire file into RAM."""
+    digest = hashlib.sha256()
+    with Path(path).open("rb") as stream:
+        for block in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
 def refresh_manifest(directory):
-    """Refresh checksums after optional COMSOL artifacts change."""
+    """Refresh artifact checksums; immutable input_manifest.json is preserved."""
     folder = Path(directory)
     manifest = {
-        p.name: {"bytes": p.stat().st_size, "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}
-        for p in sorted(folder.iterdir())
-        if p.is_file() and p.name != "manifest.json"
+        p.relative_to(folder).as_posix(): {"bytes": p.stat().st_size, "sha256": file_sha256(p)}
+        for p in sorted(folder.rglob("*"))
+        if p.is_file() and p != folder / "manifest.json"
     }
     (folder / "manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf8")
     return folder

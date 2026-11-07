@@ -43,4 +43,3 @@ def test_legacy_config_and_unbounded_parameter():
     assert Config.from_dict({}).m_cal == 56
     cfg = Config.from_dict({"m_cal": 1024})
     assert Config.from_dict(json.loads(json.dumps(cfg.to_dict()))) == cfg
-

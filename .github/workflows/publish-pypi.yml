@@ -1,4 +1,4 @@
-name: Publish v0.3.4 to PyPI
+name: Publish v0.3.9.dev12 to PyPI
 on:
   push:
     branches: [main]
@@ -7,7 +7,7 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: pypi-v0.3.4
+  group: pypi-v0.3.9.dev12
   cancel-in-progress: false
 jobs:
   verify:
@@ -16,40 +16,65 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: 1e1a56021277556593a6e4925b91b78b93c77fb2
+          ref: ${{ github.sha }}
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Build and check exact source
+      - name: Build and check this exact source
         run: |
           python -m pip install ".[dev]"
           python -m ruff check src tests benchmarks
+          python -c "import tomllib; assert tomllib.load(open('pyproject.toml','rb'))['project']['version'] == '0.3.9.dev12'"
           python -m build
           python -m twine check --strict dist/*
       - name: Test installed wheel outside checkout
         run: |
-          python -m pip install --force-reinstall --no-deps dist/tpmslab-0.3.4-py3-none-any.whl
+          python -m pip install --force-reinstall --no-deps dist/tpmslab-0.3.9.dev12-py3-none-any.whl
           cd "$RUNNER_TEMP"
-          python -I -m pytest "$GITHUB_WORKSPACE/tests" --import-mode=importlib -q
-          python -I -c "from importlib.metadata import version; from tpmslab import Config, generate; assert version('tpmslab') == '0.3.4'; mesh = generate(Config(resolution=8, m_cal=80, domain_mode='solid_fluid')); assert mesh['report']['config']['m_cal'] == 80; print('Installed wheel calibration and dual mesh passed')"
+          python -I -m pytest "$GITHUB_WORKSPACE/tests" --import-mode=importlib -q --junitxml="$GITHUB_WORKSPACE/wheel-tests.xml"
+          python -I -c "from importlib.metadata import version; from tpmslab import Config, generate; assert version('tpmslab') == '0.3.9.dev12'; assert 'inversion_pairing' not in Config.__dataclass_fields__; m=generate(Config(resolution=8,domain_mode='solid_fluid',lattice='bcc',periodic_faces=True)); assert m['tetra'].shape[1] == 4; assert m['report']['periodic']['matched']; print('Installed dev12 wheel / TET4 / periodic mesh passed')"
           python -m pip check
       - uses: actions/upload-artifact@v4
         with:
-          name: pypi-verified-v0.3.4
-          path: dist/*
+          name: pypi-verified-v0.3.9.dev12
+          path: dist/tpmslab-*
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dev12-wheel-test-report
+          path: wheel-tests.xml
           if-no-files-found: error
   publish:
     needs: verify
     runs-on: ubuntu-latest
     environment:
       name: pypi
-      url: https://pypi.org/project/tpmslab/0.3.4/
+      url: https://pypi.org/project/tpmslab/0.3.9.dev12/
     permissions:
       id-token: write
     steps:
       - uses: actions/download-artifact@v4
         with:
-          name: pypi-verified-v0.3.4
+          name: pypi-verified-v0.3.9.dev12
           path: dist/
       - name: Publish verified distributions
         uses: pypa/gh-action-pypi-publish@release/v1
+  github-release:
+    needs: publish
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: pypi-verified-v0.3.9.dev12
+          path: dist/
+      - name: Create the matching GitHub pre-release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          sha256sum dist/* > SHA256SUMS.txt
+          gh release create v0.3.9.dev12 dist/* SHA256SUMS.txt --target "$GITHUB_SHA" --title "TPMS Lab v0.3.9.dev12" --prerelease --notes-file docs/RELEASE_0.3.9.dev12.md

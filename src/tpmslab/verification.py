@@ -2,6 +2,8 @@
 
 import numpy as np
 
+from .quality import unique_rows
+
 
 def audit_interface(model):
     """Count invalid/missing/duplicate interface faces without trusting the report."""
@@ -11,7 +13,7 @@ def audit_interface(model):
     interface = np.sort(np.asarray(model["interface"]), axis=1)
     # Independent local-face ordering; canonical faces do not depend on orientation.
     faces = np.sort(tetra[:, [[0, 1, 2], [0, 1, 3], [0, 2, 3], [1, 2, 3]]].reshape(-1, 3), axis=1)
-    keys, inverse, counts = np.unique(faces, axis=0, return_inverse=True, return_counts=True)
+    keys, inverse, counts = unique_rows(faces, return_inverse=True, return_counts=True)
     solid = np.bincount(inverse, weights=np.repeat(phases == 1, 4), minlength=len(keys))
     fluid = np.bincount(inverse, weights=np.repeat(phases == 2, 4), minlength=len(keys))
     expected = {tuple(k) for k in keys[(counts == 2) & (solid == 1) & (fluid == 1)]}
@@ -45,7 +47,7 @@ def audit_openings(model, size):
         faces = np.sort(
             cells[:, [[0, 1, 2], [0, 1, 3], [0, 2, 3], [1, 2, 3]]].reshape(-1, 3), axis=1
         )
-        faces, counts = np.unique(faces, axis=0, return_counts=True)
+        faces, counts = unique_rows(faces, return_counts=True)
         faces = faces[counts == 1]
         p = points[faces]
         areas = np.linalg.norm(np.cross(p[:, 1] - p[:, 0], p[:, 2] - p[:, 0]), axis=1) / 2

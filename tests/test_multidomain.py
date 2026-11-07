@@ -43,7 +43,8 @@ def test_complementary_partition(family, mode):
 
 
 @pytest.mark.parametrize("mode", ["sheet", "solid_below", "solid_above"])
-def test_analytic_aligned_half_box(mode, tmp_path):
+@pytest.mark.parametrize("interpolation", ["linear", "implicit_root", "quadratic_root"])
+def test_analytic_aligned_half_box(mode, interpolation, tmp_path):
     m = generate(
         Config(
             family="Custom",
@@ -54,6 +55,7 @@ def test_analytic_aligned_half_box(mode, tmp_path):
             phase_degrees=(0, 0, 0),
             domain_mode="solid_fluid",
             resolution=12,
+            edge_interpolation=interpolation,
         )
     )
     assert m["report"]["solid_volume_mm3"] == pytest.approx(62.5)
@@ -62,6 +64,11 @@ def test_analytic_aligned_half_box(mode, tmp_path):
     p = m["points"][m["interface"]]
     area = np.linalg.norm(np.cross(p[:, 1] - p[:, 0], p[:, 2] - p[:, 0]), axis=1).sum() / 2
     assert area == pytest.approx(25)
+    json.dumps(m["report"], allow_nan=False)
+    if interpolation != "linear":
+        assert m["report"]["edge_root_cut_count"] == 0
+        assert m["report"]["edge_root_blend"] is None
+        assert m["report"]["edge_root_fully_projected_fraction"] is None
     folder = save_model(m, tmp_path / "dual")
     with np.load(folder / "mesh.npz") as a:
         assert np.array_equal(a["phase_ids"], m["phase_ids"])
@@ -70,6 +77,11 @@ def test_analytic_aligned_half_box(mode, tmp_path):
     metadata = json.loads((folder / "domains.json").read_text())
     assert metadata["boundaries"]["8"] == "solid_fluid_interface"
     nas = (folder / "mesh.nas").read_text()
+    tets = [line.split(",") for line in nas.splitlines() if line.startswith("CTETRA,")]
+    assert len(tets) == len(m["tetra"])
+    assert all(len(card) == 7 for card in tets)
+    assert not any(line.startswith(("CTRIA6,", ",")) for line in nas.splitlines())
+    assert not list(folder.glob("mesh_quadratic.*"))
     for domain in metadata["domains"]:
         assert f"PSOLID,{domain['nastran_pid']},1" in nas
     java = export_java(folder, m["report"]).read_text()

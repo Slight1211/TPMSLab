@@ -1,21 +1,107 @@
+# TPMS Lab 0.3.9.dev12: Python to COMSOL workflow
+
+Mesh export uses four-node tetrahedra.
+
+This is the 0.3.9.dev12 pre-release. Install this exact version with
+`python -m pip install "tpmslab==0.3.9.dev12"` (or use `[web]` for the local UI).
+It includes the development improvements through dev12 and excludes dev13's
+experimental phase-exchanging inversion pairing.
+See [release notes](docs/RELEASE_0.3.9.dev12.md) for scope and validation.
+
+New in dev11: optional `surface_envelope` (mm) in `optimize_mesh` / `--surface-envelope`:
+interface nodes may leave the exact surface by a bounded, reported distance for
+higher worst-cell quality. Next steps and project state: [docs/HANDOFF_ZH.md](docs/HANDOFF_ZH.md).
+
+
+New in dev10: `optimize_mesh(model, effort="high")` / `--optimize-effort high`
+targets all cells below quality 0.7 (BCC solid p01 about 0.57 median, up to 0.66;
+higher than fTetWild in 12 of 16 benchmark cases at 2–5x less time).
+
+
+New in dev9: `snap_alpha_boundary` (box-layer snapping, 0.35 with BCC),
+`periodic_faces=True` (identical opposite faces for
+periodic conditions) and a wall-resolution report. Recommended BCC preset:
+`Config(lattice="bcc", resolution=10, snap_alpha=0.3, snap_alpha_boundary=0.35,
+domain_mode="solid_fluid", edge_interpolation="implicit_root")` + `optimize_mesh` (add `effort="high"` for the best quality).
+Side-by-side results against fTetWild, TetGen, Gmsh and microgen are in
+[the comparison](docs/COMPARISON_ZH.md). COMSOL checks of the new outputs:
+`Run-Dev9Validation.cmd`.
+
+
+New in dev8: optional body-centred cubic background lattice,
+`generate(Config(..., lattice="bcc", resolution=10, snap_alpha=0.3,
+edge_interpolation="implicit_root"))` or `tpmslab generate --lattice bcc`.
+All background tetrahedra are congruent (mean ratio 0.952, dihedral angles
+60°/90°). Use about 5/6 of the Kuhn resolution for a similar element count.
+Measured against Kuhn in [the comparison](docs/COMPARISON_ZH.md) (BCC section).
+The default stays `lattice="kuhn"` and reproduces dev7 arrays exactly.
+
+Start with [Python → COMSOL instructions](docs/PYTHON_COMSOL_ZH.md).
+Generate once with `generate` / `save_model`, then use `run_comsol(saved_folder)`
+or `python -m tpmslab comsol --source saved_folder`. Each attempt preserves its
+own inputs, settings, logs and MPH files; the current status never inherits an
+earlier successful solve. Mesh inputs are checked against an immutable manifest.
+This build also fixes nonuniform-grid Richardson fits and empty-cut projection,
+adds bounded off-grid checks for custom fields, and checkpoints convergence runs.
+An explicit `preferences_directory` is copied per attempt; global COMSOL preferences
+remain separate. Short native scratch/recovery paths avoid Windows path-length
+failures. See the [tool comparison](docs/COMPARISON_ZH.md) for scope and limitations.
+
+The sections below describe the previous development stages. Historical test
+counts and numerical claims must be read with the corrected convergence notes.
+
+## Previous 0.3.8.dev0: pre-cut vertex snapping
+
+Local improvement build, 2026-10-29. [中文说明、实测结果与复现](docs/VERTEX_SNAPPING_ZH.md).
+Opt in with `generate(Config(..., snap_alpha=0.25))` or `tpmslab generate --snap-alpha 0.25`.
+Lattice vertices within `snap_alpha` of a cut point are moved onto the isosurface before
+clipping, so sliver cut cells are not created; outer-box nodes stay on their faces, moves that
+would invert, flatten or pinch are reverted, and the complementary phases keep an identical
+interface. On the 12 study designs aggregate Q<0.01 cells went 2710 -> 1 and tetrahedra
+489696 -> 211328, at the cost of a 10-25 % higher interface RMS distance to the implicit
+surface and an unchanged-median but worse-worst-case solid-density error (3.66 -> 4.03 pp).
+Combined with `edge_interpolation="implicit_root"` the interface nodes all lie on the implicit
+surface and the median solid-density error halves (1.52 -> 0.69 pp) at the same quality tail.
+Default `snap_alpha=0` reproduces the 0.3.7 arrays exactly. No solver claim is made.
+
+## Previous 0.3.7.dev0 development: audited interior mesh conditioning
+
+Local improvement build, 2026-10-28. [中文改进说明、实测结果与使用方法](docs/QUALITY_CONDITIONING_ZH.md).
+Opt in with `generate(config, condition=True)`, `tpmslab generate --condition`,
+or the browser's **优化内部网格** checkbox. Boundary/interface vertices, cells,
+node count and labels remain fixed. Per-phase quality/volume gates retain only
+qualified candidates; failed candidates are explicitly rolled back. No new runtime
+dependency is required. This is local smoothing, not a new remeshing algorithm.
+
+The 12 selected paired meshes reduced aggregate Q<0.01 counts from 2710 to 1476;
+11 candidates passed and one was rolled back. All independent geometry audits and
+the full-box scalar diffusion patch checks passed. Iterative solver counts changed
+in both directions; no general speedup or actual pore-flow accuracy is established.
+Raw case records and meshes are in `quality_validation_20261028/` in this delivery.
+The original generator defaults are unchanged; conditioning is optional.
+
+## Previous combined TPMS development
+
+This local development version adds spatial transitions between two TPMS families. See [Combined TPMS](docs/COMBINED_TPMS.md) and [the Python example](examples/combined_tpms.py). Published 0.3.4 and frozen benchmark sources remain separate.
+
 # TPMS Lab
 
 [English quick start](docs/QUICKSTART_EN.md) | [中文使用说明](docs/QUICKSTART_ZH.md)
 
 An installable Python toolkit for graded TPMS-derived **solid and complementary pore-fluid volume meshes**.
-The current source revision is 0.3.4 (no fixed resolution or cell-count upper limits). The published
-PyPI baseline is 0.3.0. This repository is public. Source, tests, examples and versioned
-reproducibility records are distributed together. Use an exact commit or the
-`v0.3.0` tag, rather than a changing `main`, for reproducible work.
+This directory contains the 0.3.9.dev12 pre-release. The previous stable
+baseline is [TPMS Lab 0.3.4 on PyPI](https://pypi.org/project/tpmslab/0.3.4/)
+and [source commit 1e1a560](https://github.com/Slight1211/TPMSLab/tree/1e1a56021277556593a6e4925b91b78b93c77fb2).
+This version includes spatial TPMS blending,
+implicit-edge projection during two-phase mesh generation, and optional COMSOL
+quality remeshing after export. The default configuration keeps blending disabled.
 
-[Version and installation details](docs/VERSION_0.3.0.md) |
+[Quality-remeshing details](docs/QUALITY_REMESH.md) |
 [GitHub releases](https://github.com/Slight1211/TPMSLab/releases)
 
 A public source repository, a GitHub Release, a Zenodo archive and a PyPI upload
 are separate records. Cite a DOI only after the archive is actually published.
-Version 0.3.0 is available on [PyPI](https://pypi.org/project/tpmslab/0.3.0/).
-Version 0.3.4 is a source/local-wheel patch until a separate release is published.
-See [patch notes](docs/RELEASE_NOTES_v0.3.4.md).
+See [0.3.4 patch notes](docs/RELEASE_NOTES_v0.3.4.md).
 
 ## Install
 
@@ -43,6 +129,115 @@ print(mesh["report"]["actual_density"])
 save_model(mesh, "gyroid_result")  # destination must not exist
 ```
 
+For an experimental geometry-accuracy option in two-phase mode, set
+`edge_interpolation="implicit_root"` in `Config`. It moves shared cut vertices
+to roots of the original implicit field, accepting only moves that keep all
+incident tetrahedra positive. The default is `"linear"`. In the nine tested
+`n=16` graded designs, the option reduced median absolute density error from
+0.971 to 0.216 percentage points at unchanged tetrahedron counts, but it did
+not repair the low-quality element tail. It is not yet validated at all sizes
+or for every field and should be checked against an independent geometry
+reference for the intended design.
+
+The additional experimental `"quadratic_root"` option uses three batched
+field evaluations per cut edge and a quadratic crossing instead of an
+iterative scalar root solve; it applies the same positive-tetrahedron guard.
+In nine `n=16` graded designs, median density error was 0.206 percentage
+points versus 0.216 for `"implicit_root"` and 0.971 for `"linear"`, at
+unchanged element counts. In three repeated central-gradient timing cases it
+was 16–19% faster than iterative roots, but 5–6% slower than linear cuts.
+These are local exploratory measurements. The quality tail remains and
+global density error does not bound local surface or solver error.
+
+### Cut-layer optimisation (`optimize_mesh`)
+
+```python
+from tpmslab import Config, generate
+
+mesh = generate(Config(family="Gyroid", resolution=12, domain_mode="solid_fluid",
+                       snap_alpha=0.25, edge_interpolation="implicit_root"), optimize=True)
+print(mesh["report"]["optimization"]["p01_before"], mesh["report"]["optimization"]["p01_after"])
+```
+
+`optimize=True` (CLI `--optimize`, browser checkbox) runs three local steps on the
+generated mesh: 2-3 / 3-2 / 4-4 reconnection of interior faces and edges of the
+cut layer, maximin smoothing of interior nodes, and sliding of boundary nodes
+within the box faces and along the *exact implicit level set* (each move is
+re-projected onto the zero set). Box faces and the interface may be
+retriangulated; interface cap flips can transfer cells between phases. The two
+phases remain conforming, and the result is audited before it is returned.
+
+Starting with dev6, surface moves check the sampled chord-error criterion
+against the current neighbouring geometry, with `chord_tolerance=0.0` by
+default. Each round must preserve each phase's minimum quality, p01 and
+low-quality volume fraction; median quality may lose at most 15% relative to
+the input. The cumulative phase volume shift is limited to 0.3 percentage
+points of box volume. A rejected round returns the last accepted mesh, with
+the reason recorded in `report["optimization"]`. These configurable budgets
+are geometry checks, not a bound on finite-element error. For tighter control:
+
+```python
+from tpmslab import optimize_mesh
+
+mesh = optimize_mesh(generate(config), max_phase_volume_shift_pp=0.05)
+# To keep all boundary vertices and phase volumes fixed:
+mesh = optimize_mesh(generate(config), surface=False)
+```
+
+Explicit `chord_tolerance=None` disables the hard chord gate, and
+`max_phase_volume_shift_pp=None` disables the volume budget. Final density
+profiles are recomputed from the exported cells; `slab_count` supplies the
+weights for unequal-width bins. Optimisation clears input COMSOL solve
+evidence because it applies to the previous mesh.
+
+Dev7 also checks the worst incident quality separately for each phase before
+accepting a mixed-phase vertex move. This prevents a local gain in one phase
+from degrading the other phase and wasting a whole optimisation round. The
+existing chord, volume and round-level quality budgets are unchanged. More
+rounds can consequently be retained, so a better final quality may require
+more optimisation time for some designs. Per-round
+`surface_phase_guard_rejected_trials` records the local filtering.
+
+Generation reuses exactly ordered shared-face SVD results and screens clearly
+unhelpful fan candidates with scalar arithmetic; close decisions and accepted
+fans retain the original NumPy scoring. Reconnection caches cell metrics only
+while coordinates are fixed. Surface chord checks use actual incident faces
+and skip candidates that cannot pass the quality tests.
+
+`benchmarks/quality_vs_gmsh.py` compares the result with Gmsh on the same
+boundary polyhedron (numbers in `docs/COMPARISON_ZH.md`).
+
+### Optional quality remeshing in COMSOL
+
+With a licensed COMSOL Windows installation (6.2.0.290 verified; the 6.3+ mesh API is selected by reflection), a verified `solid_fluid` export can
+be passed to COMSOL's existing face and tetrahedral remeshing operations:
+
+```python
+from tpmslab import remesh_in_comsol
+
+evidence = remesh_in_comsol(
+    "gyroid_result", "gyroid_quality", volume_size=7,
+    preferences_directory="evidence/authorized_preferences",  # optional, as for run_comsol
+)
+print(evidence["quality_p01_solid_before"], evidence["q01_solid"])
+```
+
+Scratch, recovery and workspace paths are short temporary directories recorded
+in `runtime.json`; `temp_directory` is accepted for compatibility only. This
+mode has not yet been exercised in the shipped evidence.
+The COMSOL step can be applied to either interpolation mode. The new directory contains `quality_remeshed.mph`, logs, and
+`quality_remesh_verification.json`. The function checks saved/reopened domain and
+boundary selections, exact incidence of every cross-phase tetrahedral face
+against the declared shared-interface triangles, the total box volume,
+phase-domain volume drift, interface-area drift, and improvement in
+first-percentile solid-tetrahedron quality.
+`volume_size` and optional `face_size` are COMSOL's 1--9 size presets, not
+physical millimetres. Choose settings for the application and inspect the
+reported geometric changes; quality improvement does not imply improved
+density fidelity or solver convergence. An audit failure raises and retains
+its output for inspection. This is a COMSOL-dependent preparation step, not
+a new meshing algorithm or part of the Python-only generation path.
+
 `generate` also accepts a dictionary. `list_families()` returns formula metadata.
 Coordinates are millimetres; array connectivity is zero-based. The returned
 mapping contains `points`, `tetra`, `boundary`, `boundary_ids`, `domains`,
@@ -58,6 +253,7 @@ tpmslab families
 tpmslab web --output local_models
 # Requires licensed COMSOL on Windows:
 tpmslab generate --config params.json --out solved_result --solve
+tpmslab remesh-quality --source gyroid_result --out gyroid_quality --volume-size 7
 ```
 
 Export includes `mesh.nas` (CTETRA volume elements and labelled boundary

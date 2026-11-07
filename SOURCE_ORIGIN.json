@@ -1,0 +1,10 @@
+{
+  "base_version": "0.3.9.dev0",
+  "base_archive": "E:\\Tpms Generate\\TPMSLab_python_comsol_0.3.9.dev0.zip",
+  "base_archive_sha256": "441b89b515695385134ec4e37f1b5373b7d258cf3fab3ffe290f2b9d333b83b1",
+  "local_version": "0.3.9.dev12",
+  "parent_source_version": "0.3.9.dev11",
+  "published": false,
+  "original_archive_modified": false,
+  "scope": "User-authorized generation and optimisation improvements; dev6 geometry budgets and final-array reporting retained; dev7 shared-face ordering reuse, exact-decision fan screening, bounded metric caching, packed chord checks and phase-aware surface moves; dev8 optional body-centred cubic (BCC) background lattice; dev9 boundary snap threshold, quadratic curved export, periodic-matching faces, wall-resolution report; dev10 high-effort optimisation; dev11 optional surface envelope and ChatGPT hand-off notes; dev12 linear tetrahedron export only"
+}

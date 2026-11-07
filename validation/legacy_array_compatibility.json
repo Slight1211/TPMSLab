@@ -1,0 +1,301 @@
+{
+  "base_version": "0.3.5.dev0",
+  "new_version": "0.3.6.dev0",
+  "passed": true,
+  "cases": [
+    {
+      "configuration": {
+        "resolution": 8,
+        "m_cal": 12,
+        "domain_mode": "solid"
+      },
+      "all_mesh_arrays_identical": true,
+      "array_hashes": {
+        "boundary": {
+          "dtype": "int32",
+          "sha256": "56e977815e11f0b3e689559a6aaddb56809f3476f6470e1f2ac570fb00baa4ac",
+          "shape": [
+            3816,
+            3
+          ]
+        },
+        "boundary_ids": {
+          "dtype": "int64",
+          "sha256": "d46601479a56fce864ba8bd0a2957154c08bd3062e76366def01be0a6d572653",
+          "shape": [
+            3816
+          ]
+        },
+        "domains": {
+          "dtype": "int32",
+          "sha256": "b3573c5ab39a9c73a0c35e76c615bf80205482fbc4b742f9f5f07e40165cede1",
+          "shape": [
+            7159
+          ]
+        },
+        "points": {
+          "dtype": "float64",
+          "sha256": "76ae8ecd80c6753c8c5fd27f9983a1595e1ccb1076bb63c4e9675294404deeaf",
+          "shape": [
+            2304,
+            3
+          ]
+        },
+        "tetra": {
+          "dtype": "int32",
+          "sha256": "401c9d37845e4dfac52ff6e2eb91af23b9c9e5ad1b4b72b875519c4c6f92a0f7",
+          "shape": [
+            7159,
+            4
+          ]
+        }
+      }
+    },
+    {
+      "configuration": {
+        "resolution": 8,
+        "m_cal": 12,
+        "domain_mode": "solid_fluid"
+      },
+      "all_mesh_arrays_identical": true,
+      "array_hashes": {
+        "boundary": {
+          "dtype": "int32",
+          "sha256": "2a6157388d668af017b410d0ebbbadcef8e9e312049bdea70dbc76bc46717cab",
+          "shape": [
+            4828,
+            3
+          ]
+        },
+        "boundary_ids": {
+          "dtype": "int32",
+          "sha256": "e471fe212306500cd144ab875819d29c5e6d41396e5a59b7fbff71997694416d",
+          "shape": [
+            4828
+          ]
+        },
+        "domains": {
+          "dtype": "int32",
+          "sha256": "d4de5f559e506a1f9035408c395788a291c36505f8bc440a3f845e47f510ebfb",
+          "shape": [
+            13732
+          ]
+        },
+        "fluid_boundary": {
+          "dtype": "int32",
+          "sha256": "d1a48e9ba05a185dac0006713129bd3e26db3e4e79f2b1eba21b4813c3f5951b",
+          "shape": [
+            4104,
+            3
+          ]
+        },
+        "interface": {
+          "dtype": "int32",
+          "sha256": "7c27cf626f16f16220d66ba1e7c8b40a14205a98a0ad0d37785f9dd29ab1c7f4",
+          "shape": [
+            3092,
+            3
+          ]
+        },
+        "phase_ids": {
+          "dtype": "int32",
+          "sha256": "f2443c1092203b0dc2fcb90c53e847db990b322eecec1349830776a8b9f76172",
+          "shape": [
+            13732
+          ]
+        },
+        "points": {
+          "dtype": "float64",
+          "sha256": "fb7259da0019957795d36df58e2345fe822068bd7e52c8a624dd1e6f1c3c4652",
+          "shape": [
+            2901,
+            3
+          ]
+        },
+        "solid_boundary": {
+          "dtype": "int32",
+          "sha256": "88bc96b31d63e3f15e456e363427c847bdd24dd01d2e3218d46464f361e3c6e5",
+          "shape": [
+            3816,
+            3
+          ]
+        },
+        "tetra": {
+          "dtype": "int32",
+          "sha256": "7dfa4c21f1f2aa43d6736a1ed99272c2c92102015177496259837e086e8bd38b",
+          "shape": [
+            13732,
+            4
+          ]
+        }
+      }
+    },
+    {
+      "configuration": {
+        "resolution": 8,
+        "m_cal": 12,
+        "domain_mode": "solid_fluid",
+        "edge_interpolation": "quadratic_root",
+        "family": "Diamond"
+      },
+      "all_mesh_arrays_identical": true,
+      "array_hashes": {
+        "boundary": {
+          "dtype": "int32",
+          "sha256": "972b3cb3d8d5cd36a614b0ebfd68b3374950269134dc34856f432d8a8e1dcfbd",
+          "shape": [
+            5664,
+            3
+          ]
+        },
+        "boundary_ids": {
+          "dtype": "int32",
+          "sha256": "1454036f6235c33ee6dc788a7316cbcc55d6d9ba9f7380a4fac3cd6e7a7af094",
+          "shape": [
+            5664
+          ]
+        },
+        "domains": {
+          "dtype": "int32",
+          "sha256": "5d5244a6bc9ecf052d227a8e233d9e217638ad0bf372f716e4728e587e4a35a5",
+          "shape": [
+            14472
+          ]
+        },
+        "fluid_boundary": {
+          "dtype": "int32",
+          "sha256": "e2a1fd59c1d34518876e8d9a63975f93b9fd3ce61069fba12a79748fc8769c75",
+          "shape": [
+            4752,
+            3
+          ]
+        },
+        "interface": {
+          "dtype": "int32",
+          "sha256": "d5a76151a118042dd81a83f591a4b7a61e3441719049f89fece072f3f23f0d99",
+          "shape": [
+            3840,
+            3
+          ]
+        },
+        "phase_ids": {
+          "dtype": "int32",
+          "sha256": "19d8031925b2fd391c3c4021f60cfa3967aef4d5c7021d355aa1655529550fa9",
+          "shape": [
+            14472
+          ]
+        },
+        "points": {
+          "dtype": "float64",
+          "sha256": "665cbbfc9208af0c5fa08d49ac4df2d3e724ea3607cad610a9c8cebde2af71a1",
+          "shape": [
+            3005,
+            3
+          ]
+        },
+        "solid_boundary": {
+          "dtype": "int32",
+          "sha256": "80d55d1b3dd4b3a5d0ecff962312bee2c1f75bd62ed6ae2ec98c81b6354f68ce",
+          "shape": [
+            4752,
+            3
+          ]
+        },
+        "tetra": {
+          "dtype": "int32",
+          "sha256": "24a957a4cafaaa2f8691dbb6061ffb8cbcae3f547fad430a00c22a67227aad9a",
+          "shape": [
+            14472,
+            4
+          ]
+        }
+      }
+    },
+    {
+      "configuration": {
+        "resolution": 8,
+        "m_cal": 12,
+        "domain_mode": "solid_fluid",
+        "mode": "solid_above",
+        "family": "Primitive Schwartz",
+        "cells": [
+          2,
+          1,
+          1
+        ]
+      },
+      "all_mesh_arrays_identical": true,
+      "array_hashes": {
+        "boundary": {
+          "dtype": "int32",
+          "sha256": "dc134cdc2b54ba4cfb2f043f434b9844127594647ff414ac38e5b0f82226b87a",
+          "shape": [
+            3756,
+            3
+          ]
+        },
+        "boundary_ids": {
+          "dtype": "int32",
+          "sha256": "8ced3f78431f3ab136d8d9b3b0e8f8baf99b0ca14992a5b0062791cc46b24379",
+          "shape": [
+            3756
+          ]
+        },
+        "domains": {
+          "dtype": "int32",
+          "sha256": "1a74863ac527babce0371e787beb77b69b916e2571417b894147d073b6062c3c",
+          "shape": [
+            12848
+          ]
+        },
+        "fluid_boundary": {
+          "dtype": "int32",
+          "sha256": "3d205c2c0d9dcf6fc79c93e356294799db3ffb6d7f8805143729f21effe8385e",
+          "shape": [
+            2838,
+            3
+          ]
+        },
+        "interface": {
+          "dtype": "int32",
+          "sha256": "5de5f577e7f6901163a6f6c691795eef3832b31d0f54536970f1d7cf70a73ad9",
+          "shape": [
+            2048,
+            3
+          ]
+        },
+        "phase_ids": {
+          "dtype": "int32",
+          "sha256": "1a74863ac527babce0371e787beb77b69b916e2571417b894147d073b6062c3c",
+          "shape": [
+            12848
+          ]
+        },
+        "points": {
+          "dtype": "float64",
+          "sha256": "cf5c44e90e20960d54d6d838aaa0087316e6e3c29b782e4fca5e45c3162acd18",
+          "shape": [
+            2735,
+            3
+          ]
+        },
+        "solid_boundary": {
+          "dtype": "int32",
+          "sha256": "976031f324f1837e47d00b934e4100733cf4d2359412cb076bd8966a79363010",
+          "shape": [
+            2966,
+            3
+          ]
+        },
+        "tetra": {
+          "dtype": "int32",
+          "sha256": "0bc5d5cb846392010991ce09f4b6beb1a0d10d1bfce3b56e2aa1de7a7900f98a",
+          "shape": [
+            12848,
+            4
+          ]
+        }
+      }
+    }
+  ]
+}

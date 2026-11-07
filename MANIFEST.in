@@ -3,12 +3,15 @@ recursive-include licenses *.txt
 recursive-include docs *.md *.m
 recursive-include examples *.json *.py
 recursive-include tests *.py
+include CITATION.cff
+include requirements-quality-verified.txt
+include Start-TpmsLab.ps1
+include Start-TpmsLab.cmd
+include Setup-Python.ps1
+include Run-ComsolConvergence.ps1
+include Run-ComsolConvergence.cmd
+include requirements-python-comsol-verified.txt
+include SOURCE_ORIGIN.json
 recursive-include benchmarks *.py
-
-exclude docs/RELEASE_CHECKLIST.md
-prune paper
-
-recursive-include validation *.json *.csv *.md
-include CITATION.cff .zenodo.json
 
 include docs/runtime_hashes_0.3.1.json

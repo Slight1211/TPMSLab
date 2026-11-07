@@ -1,0 +1,21 @@
+{
+  "family": "Gyroid",
+  "combine": "blend",
+  "family_secondary": "Diamond",
+  "blend_axis": "z",
+  "blend_start": 0.25,
+  "blend_end": 0.75,
+  "blend_profile": "smoothstep",
+  "blend_calibration_steps": 17,
+  "mode": "sheet",
+  "domain_mode": "solid_fluid",
+  "size": [5, 5, 5],
+  "cells": [1, 1, 1],
+  "density_start": 0.25,
+  "density_end": 0.50,
+  "gradient": "linear",
+  "axis": "z",
+  "resolution": 16,
+  "m_cal": 56,
+  "edge_interpolation": "quadratic_root"
+}

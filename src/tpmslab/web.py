@@ -88,10 +88,18 @@ def save_model(model, folder):
     refresh_manifest(folder)
 
 
-def generate_task(job, config):
+def generate_task(job, config, condition=False, optimize=False, effort="standard"):
     global BUSY
     try:
         model = generate_volume(config, lambda msg: progress(job, msg))
+        if optimize:
+            from .optimize import optimize_mesh
+
+            model = optimize_mesh(model, effort=effort, progress=lambda msg: progress(job, msg))
+        elif condition:
+            from .conditioning import condition_mesh
+
+            model = condition_mesh(model, progress=lambda msg: progress(job, msg))
         save_model(model, job["folder"])
         job.update(model=model, report=model["report"], status="ready")
         progress(job, "The computational volume was generated. Export NAS or create an MPH model.")
@@ -108,7 +116,17 @@ def generate_task(job, config):
 def generate():
     global BUSY
     try:
-        config = Config.from_dict(request.get_json())
+        data = request.get_json()
+        if not isinstance(data, dict):
+            raise ValueError("Parameters must be a JSON object")
+        condition = data.pop("condition", False)
+        optimize = data.pop("optimize", False)
+        effort = data.pop("optimize_effort", "standard")
+        if effort not in ("standard", "high"):
+            raise ValueError("optimize_effort must be standard or high")
+        if type(condition) is not bool or type(optimize) is not bool:
+            raise ValueError("condition and optimize must be booleans")
+        config = Config.from_dict(data)
     except (ValueError, TypeError, SyntaxError) as exc:
         return jsonify(error=str(exc)), 400
     with LOCK:
@@ -128,7 +146,7 @@ def generate():
             "events": [],
         }
         JOBS[key] = job
-    POOL.submit(generate_task, job, config)
+    POOL.submit(generate_task, job, config, condition, optimize, effort)
     return jsonify(id=key)
 
 
@@ -157,9 +175,8 @@ def comsol_task(job, solve, material):
     global BUSY
     try:
         report = job["report"]
-        evidence = job["folder"] / "comsol_verification.json"
-        if evidence.exists():
-            evidence.unlink()
+        # build_mph preserves any previous top-level verification inside the
+        # new attempt directory; nothing is deleted here.
         build_mph(job["folder"], report, solve, material, lambda msg: progress(job, msg))
         job.update(status="ready", report=report)
     except Exception as exc:
