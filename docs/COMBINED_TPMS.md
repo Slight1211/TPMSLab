@@ -1,7 +1,7 @@
 # Combined TPMS: spatial transition between two families
 
-Available in the local `0.3.6.dev0` development package. This is not part of the
-published `0.3.4` wheel or the frozen manuscript benchmark software.
+Spatial blending was introduced in `0.3.6.dev0` and is available in the
+`0.3.9` stable release. The manuscript benchmark used the frozen `0.3.4` source.
 
 ```python
 from tpmslab import Config, generate, save_model

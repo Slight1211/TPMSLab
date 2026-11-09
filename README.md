@@ -1,12 +1,10 @@
-# TPMS Lab 0.3.9.dev12: Python to COMSOL workflow
+# TPMS Lab 0.3.9: Python to COMSOL workflow
 
 Mesh export uses four-node tetrahedra.
 
-This is the 0.3.9.dev12 pre-release. Install this exact version with
-`python -m pip install "tpmslab==0.3.9.dev12"` (or use `[web]` for the local UI).
-It includes the development improvements through dev12 and excludes dev13's
-experimental phase-exchanging inversion pairing.
-See [release notes](docs/RELEASE_0.3.9.dev12.md) for scope and validation.
+Install the stable release with `python -m pip install "tpmslab==0.3.9"`
+(or install `"tpmslab[web]==0.3.9"` for the local UI).
+See the [0.3.9 release notes](docs/RELEASE_0.3.9.md) for scope and validation.
 
 New in dev11: optional `surface_envelope` (mm) in `optimize_mesh` / `--surface-envelope`:
 interface nodes may leave the exact surface by a bounded, reported distance for
@@ -82,16 +80,15 @@ The original generator defaults are unchanged; conditioning is optional.
 
 ## Previous combined TPMS development
 
-This local development version adds spatial transitions between two TPMS families. See [Combined TPMS](docs/COMBINED_TPMS.md) and [the Python example](examples/combined_tpms.py). Published 0.3.4 and frozen benchmark sources remain separate.
+Spatial transitions between two TPMS families are available in 0.3.9.
+See [Combined TPMS](docs/COMBINED_TPMS.md) and [the Python example](examples/combined_tpms.py).
 
 # TPMS Lab
 
 [English quick start](docs/QUICKSTART_EN.md) | [中文使用说明](docs/QUICKSTART_ZH.md)
 
 An installable Python toolkit for graded TPMS-derived **solid and complementary pore-fluid volume meshes**.
-This directory contains the 0.3.9.dev12 pre-release. The previous stable
-baseline is [TPMS Lab 0.3.4 on PyPI](https://pypi.org/project/tpmslab/0.3.4/)
-and [source commit 1e1a560](https://github.com/Slight1211/TPMSLab/tree/1e1a56021277556593a6e4925b91b78b93c77fb2).
+The stable release is [TPMS Lab 0.3.9 on PyPI](https://pypi.org/project/tpmslab/0.3.9/).
 This version includes spatial TPMS blending,
 implicit-edge projection during two-phase mesh generation, and optional COMSOL
 quality remeshing after export. The default configuration keeps blending disabled.

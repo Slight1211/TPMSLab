@@ -1,13 +1,13 @@
 # TPMS Lab: English quick start
 
-TPMS Lab is a Python package for graded TPMS-derived solid and complementary pore-fluid volume meshes. This local development source is 0.3.5.dev0; the fixed public PyPI baseline is 0.3.4. The optional COMSOL quality-remeshing mode is described in [QUALITY_REMESH.md](QUALITY_REMESH.md).
+TPMS Lab is a Python package for graded TPMS-derived solid and complementary pore-fluid volume meshes. The stable version is [0.3.9 on PyPI](https://pypi.org/project/tpmslab/0.3.9/). The optional COMSOL quality-remeshing mode is described in [QUALITY_REMESH.md](QUALITY_REMESH.md).
 
 ## 1. Install
 
-Use Python 3.11 or later. Clone the public repository:
+Use Python 3.11 or later. Check out the release to follow the examples below.
 
 ```sh
-git clone https://github.com/Slight1211/TPMSLab.git
+git clone --branch v0.3.9 https://github.com/Slight1211/TPMSLab.git
 cd TPMSLab
 python -m pip install .
 ```
@@ -44,7 +44,7 @@ print(folder / "mesh.nas")
 
 Coordinates and dimensions are in millimetres. Connectivity arrays use zero-based indices. `save_model` requires a new directory and will not overwrite an existing result. To inspect available families, run `tpmslab families` or call `tpmslab.list_families()`.
 
-The local 0.3.5.dev0 snapshot also supports `edge_interpolation="implicit_root"`
+TPMS Lab also supports `edge_interpolation="implicit_root"`
 in `Config` when `domain_mode="solid_fluid"`. This optional geometry correction
 projects shared cut vertices toward roots of the continuous implicit field
 while checking adjacent tetrahedra for inversion. The default `"linear"`

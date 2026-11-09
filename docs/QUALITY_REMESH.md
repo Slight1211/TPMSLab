@@ -1,4 +1,4 @@
-# Optional COMSOL quality remeshing (0.3.5.dev0)
+# Optional COMSOL quality remeshing
 
 This local development API takes an already verified `solid_fluid` export and
 uses a licensed COMSOL on Windows (6.2/6.3 mesh API selected by reflection; this mode has not yet been exercised in the shipped evidence) with `RemeshFaces` and `FreeTet` to create another mesh-defined MPH. It launches through the same isolated-preference and short-scratch-path mechanism as the elasticity/flow bridge (`--preferences-directory`).
@@ -55,6 +55,6 @@ improvement does not establish general behavior for other resolutions,
 families, or geometries. Remeshing can change density realization, so check
 the intended geometric and solver observables independently.
 
-The publicly benchmarked generator remains 0.3.4. This 0.3.5.dev0 code has
-not been published to GitHub or PyPI; cite the fixed 0.3.4 source when
-describing the original head-to-head experiment.
+The optional remeshing mode was introduced in 0.3.5.dev0 and is available in
+the 0.3.9 stable release. Cite the fixed 0.3.4 source when describing the
+original head-to-head experiment.

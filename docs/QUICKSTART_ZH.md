@@ -1,6 +1,6 @@
 # Python 调用：梯度 TPMS 固体 / 流体双域
 
-需要 Python 3.11 或以上。当前源码版本为 0.3.4，PyPI 已发布基线为 0.3.0；在本仓库根目录安装：
+需要 Python 3.11 或以上。当前稳定版为 [0.3.9](https://pypi.org/project/tpmslab/0.3.9/)。在本仓库根目录安装并运行示例。
 
 ```sh
 python -m pip install .

@@ -1,3 +1,8 @@
+# 0.3.9
+
+- Promote the 0.3.9.dev12 snapshot to a stable release. See the
+  [0.3.9 release notes](docs/RELEASE_0.3.9.md) for changes since 0.3.4.
+
 # 0.3.9.dev12 — linear tetrahedron export
 
 - Remove the optional 10-node curved export and its COMSOL import validation case.
